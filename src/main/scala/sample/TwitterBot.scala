@@ -23,7 +23,7 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
   var tweets = List[Tweet]()
 
   def fetchUsers(userIds: Set[Long]): List[User] =
-    client.lookupUsers(userIds.toArray).map(User(_)).toList
+    userIds.map(id => User(client.showUser(id))).toList
 
   def addSubscription(queryStr: String): Unit = {
     subscriptions ::= queryStr
