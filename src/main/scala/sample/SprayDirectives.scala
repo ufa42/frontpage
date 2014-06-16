@@ -105,7 +105,7 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
 
 object SprayDirectives extends App {
   val host = "0.0.0.0"
-  val port = 8080
+  val port = 8889
 
   implicit val system = ActorSystem("ufa42")
   val service = system.actorOf(Props[HttpServiceActor])
