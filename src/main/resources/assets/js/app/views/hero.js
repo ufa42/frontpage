@@ -23,13 +23,7 @@ APP.MainView = Backbone.View.extend({
   render: function () {
     this.$el.html(_.template($('#mainTemplate').html(), this.event.toJSON()));
 //    this.$el.html($('#mainTemplate').html(), this.event.toJSON());
-    this.addAll();
     return this;
-  },
-
-  addAll: function () {
-    this.$el.find('#tweets').find('ul').children().remove();
-    _.each(this.tweets.models.slice(0, this.tweetsLimit), $.proxy(this, 'addTweet'));
   },
 
   addTweet: function (tweet) {
@@ -37,8 +31,8 @@ APP.MainView = Backbone.View.extend({
       tweet: tweet
     });
     var list = this.$el.find('#tweets').find('ul');
-    if (list.children().length > this.tweetsLimit)
-      list.children().slice(this.tweetsLimit).remove();
+    if (list.children().length > this.tweetsLimit - 1)
+      list.children().slice(this.tweetsLimit - 1).remove();
     $(view.render().el).children(":first").hide().prependTo(list).slideDown("slow");
   }
 });

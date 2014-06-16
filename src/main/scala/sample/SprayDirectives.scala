@@ -77,7 +77,7 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
     case _ => None
   }
 
-  val route = {
+  val route = dynamic {
     (get & path("") & headerValue(detectIOS)) { iOS =>
       if (iOS)
         getFromResource("assets/index.ios.html")

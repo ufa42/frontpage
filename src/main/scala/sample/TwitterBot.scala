@@ -35,6 +35,7 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
     var nextRunAfter = 30
     val query = new Query(queryStr)
     query.setSinceId(lastId)
+    query.setCount(100)
 
     try {
 //      client.getRateLimitStatus("search").get("/search/tweets")
@@ -42,7 +43,7 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
       lastId = result.getMaxId
       val limit = result.getRateLimitStatus
 
-      tweets ++= result.getTweets.filterNot(t => t.getText.startsWith("RT") || t.getText.startsWith("@")).map { t =>
+      tweets = tweets ::: result.getTweets.filterNot(t => t.getText.startsWith("RT") || t.getText.startsWith("@")).map { t =>
         val loc = t.getGeoLocation
         Tweet(
           t.getId,
@@ -51,7 +52,7 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
           t.getText,
           User(t.getUser)
         )
-      }
+      }.toList.reverse
 
       nextRunAfter = 2 * (if (limit.getRemaining > 0) subscriptions.length * limit.getSecondsUntilReset / limit.getRemaining else 5)
     } catch {
