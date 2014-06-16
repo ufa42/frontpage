@@ -135,7 +135,7 @@
     </script>
 
     <script type="text/template" id="mapPanelTemplate">
-        <div class="col-lg-4 col-md-5 col-sm-6 col-xs-8 location">
+        <div class="col-lg-4 col-md-5 col-sm-6 col-xs-10 location">
             <h6>Доклады @ <%= talksPlace.title %></h6>
             <ul>
                 <li><a href="https://maps.google.com/maps?q=<%= talksPlace.lat %>,<%= talksPlace.lon %>" target="_blank">
@@ -175,7 +175,7 @@
       </div>
     </header>
     <!-- Hero Section -->
-    <section id="hero" class="light" style="height: 944px;">
+    <section id="hero" class="light" >
       <div class="container">
         <div class="home-bg" id="panelMain">
         </div>
@@ -205,48 +205,26 @@
 
     <!-- About Section -->
     <section id="about" class="section dark">
-      <div class="container">
-        <h3>Девиз одной строкой</h3>
-        <div class="sub-title">который, всё же, в неё <span class="highlight">не умещается</span></div>
-        <br>
-        <br>
-        <section class="nav-tabs-simple">
-          <!-- Nav -->
-          <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a href="#format" data-toggle="tab"><i class="icon fa fa-comment-o"></i> Формат</a></li>
-            <li><a href="#whoweare" data-toggle="tab"><i class="icon fa fa-star-o"></i> О нас</a></li>
-          </ul>
-
-          <!-- Tabs -->
-          <div class="tab-content">
-            <div class="tab-pane fade in active" id="format">
-              <article class="row">
-                <div class="col-md-6 col-sm-6 col-md-offset-1 col-sm-offset-1 text-left">
-                  <h6>Суть</h6>
-                  <p>Исключены всякие абстрактные “ура-речи” про стартапы, менеджмент и мотивацию.
-                      Мы обмениваемся практическим опытом и говорим по делу. Give some background on Lightning talks and CQRS Beer.
-                  </p>
+        <article class="article-big">
+            <div class="container">
+                <h3>О чем эта конференция?</h3>
+                <div class="big col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-mb-offset-1 col-lg-10 col-lg-offset-1">Мы говорим о производственной части проектов: делимся личным опытом решения задач,
+                    рассказываем про интересные особенности языков и технологий, про эпичные фейлы и
+                    красивые решения - в общем, конференция обо всем том, что мы особенно любим в своей работе
                 </div>
-                <div class="col-md-3 col-sm-3 col-md-offset-1 col-sm-offset-1">
-                  <img class="img-responsive" src="assets/img/place/pub.jpg">
-                </div>
-              </article>
             </div>
-            <div class="tab-pane fade" id="whoweare">
-              <article class="row">
-                <div class="col-md-5 col-sm-5">
-                  <img class="img-responsive" src="assets/img/place/pub.jpg">
+            <br/>
+            <div class="container">
+                <h3>Что мы не делаем</h3>
+                <div class="big col-xs-12 col-sm-10 col-sm-offset-1 col-md-10 col-mb-offset-1 col-lg-10 col-lg-offset-1">
+                    <ul>
+                        <li>Не читаем обзорные доклады про языки программирования или технологии. Курите маны.</li>
+                        <li>Не ведем речей про фонды и инкубаторы, не занимаемся генерацией идей для бизнеса.</li>
+                        <li>Не ведем ура-мотивационные речи и не придумываем, как заработать миллион долларов в интернете.</li>
+                    </ul>
                 </div>
-                <div class="col-md-6 col-sm-6 text-left">
-                  <h6>Заголовок</h6>
-                  <p>Текст 1</p>
-				  <p>Текст 2</p>
-                </div>
-              </article>
             </div>
-          </div>
-        </section>
-      </div>
+        </article>
     </section>
     <!-- End About Section -->
 
