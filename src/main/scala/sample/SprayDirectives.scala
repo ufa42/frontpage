@@ -13,6 +13,7 @@ import spray.httpx.SprayJsonSupport.sprayJsonUnmarshaller
 import spray.routing.HttpService
 import scala.util.Random
 import java.util.UUID
+import twitter4j.TwitterException
 
 
 class HttpServiceActor extends Actor with HttpService with ActorLogging {
@@ -65,10 +66,18 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
   val twitterBot = new TwitterBot("nnrqExJROGCpBglV5xazTtzQ4", "rXLGuo1fSkHPEugIpDL2aeUSOjUASXEimjsSbLSU2ic3iHNqPD", context.system.scheduler)
   twitterBot.addSubscription("#ufa42")
 
-  context.system.scheduler.schedule(5.seconds, 2.seconds, new Runnable {
+  context.system.scheduler.schedule(5.seconds,4.seconds, new Runnable {
     override def run(): Unit = {
       val newParticipants = twitterBot.tweets.map(_.user.id).toSet -- event.participants.map(_.id)
-      event = event.copy(participants = twitterBot.fetchUsers(newParticipants) ::: event.participants)
+      if (!newParticipants.isEmpty) {
+        println("new participants: " + newParticipants)
+        try {
+          event = event.copy(participants = twitterBot.fetchUsers(newParticipants) ::: event.participants)
+        } catch {
+          case _: Throwable =>
+            // ignore it
+        }
+      }
     }
   })
 

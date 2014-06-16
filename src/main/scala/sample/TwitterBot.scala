@@ -60,6 +60,8 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
         e.printStackTrace()
         client.invalidateOAuth2Token()
         client.getOAuth2Token()
+      case _: Throwable =>
+        // ignore
     } finally {
       scheduler.scheduleOnce(nextRunAfter.seconds, new Runnable {
         override def run(): Unit = fetchFeed(queryStr)
