@@ -15,11 +15,10 @@
     <link rel="apple-touch-icon" sizes="114x114" href="assets/img/apple-touch-icon-114x114.jpg">
 
     <link href='//fonts.googleapis.com/css?family=Roboto:400,100,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-    <!--<link href='//fonts.googleapis.com/css?family=Marmelad&subset=latin,cyrillic' rel='stylesheet' type='text/css'>-->
+    <link href='//fonts.googleapis.com/css?family=Marmelad&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" type="text/css" media="all">
-    <!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" type="text/css" media="all">-->
     <link rel="stylesheet" href="assets/css/style.css" id="mainstyle" type="text/css" media="all">
 
     <!--[if lt IE 9]>
@@ -39,14 +38,13 @@
             <div class="img-wrapper">
                 <img src="assets/img/42.png">
             </div>
-            <!--<div class="hero-big">42</div>-->
             <div class="hero-normal">Обмен опытом разработки ПО</div>
         </div>
 
         <div id="hero-social">
             <nav class="navigation navigation-social">
                 <ul class="navigation-bar">
-                    <li><a href="https://twitter.com/ufa42conf" target="_blank"><span class="fa fa-twitter"></span></a>
+                    <li><a href="twitter:///user?screen_name=ufa42conf" target="_blank"><span class="fa fa-twitter"></span></a>
                 </ul>
             </nav>
             <div id="tweets" class="container">
@@ -59,7 +57,7 @@
     <script type="text/template" id="tweetTemplate">
         <li class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
             <div class="tweet-text"><%= text %></div>
-            <div class="tweet-author"><a href="https://twitter.com/<%= user.name %>">@<%= user.name %></a></div>
+            <div class="tweet-author"><a href="twitter:///user?screen_name=<%= user.name %>">@<%= user.name %></a></div>
         </li>
     </script>
 
@@ -75,7 +73,7 @@
             <div class="speaker-wrapper">
                 <img src="<%= speaker.avatarUrl %>" class="img-responsive" >
             </div>
-            <p class="author"><a href="https://twitter.com/<%= speaker.name %>" target="_blank"><strong> <%= speaker.fullname %></strong></a></p>
+            <p class="author"><a href="twitter:///user?screen_name=<%= speaker.name %>" target="_blank"><strong> <%= speaker.fullname %></strong></a></p>
             <div class="panel-heading">
                 <div class="panel-title">
                     <a data-parent="#panelTimelineOne" href="#itemOne">
@@ -93,7 +91,7 @@
                 <img src="<%= speaker.avatarUrl %>" class="img-responsive" >
             </div>
             <i class="fa fa-bolt"></i>
-            <p class="author"><a href="https://twitter.com/<%= speaker.name %>" target="_blank"><strong><%= speaker.fullname %></strong></a></p>
+            <p class="author"><a href="twitter:///user?screen_name=<%= speaker.name %>" target="_blank"><strong><%= speaker.fullname %></strong></a></p>
             <div class="panel-heading">
                 <div class="panel-title">
                     <a data-toggle="collapse" data-parent="#panelTimelineOne" href="#itemOne">
@@ -278,21 +276,8 @@
                     Зарегистрироваться на конференцию очень просто: напишите в Твиттере,
                     что вы пойдете на #ufa42conf. Наш бот обязательно учтёт ваш твит.
                 </p>
-                <!--<h5>Место</h5>-->
-                <!--<div class="row">-->
-                    <!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-                        <!--<a href="assets/img/place/f2.jpg" class="thumb-wrapper fancybox" data-fancybox-group="gallery">-->
-                            <!--<img src="assets/img/place/f2.jpg" class="img-responsive" alt="thumb-1">-->
-                        <!--</a>-->
-                    <!--</div>-->
-                    <!--<div class="col-md-3 col-sm-3 col-xs-6">-->
-                        <!--<a href="assets/img/place/f3.jpg" class="thumb-wrapper fancybox" data-fancybox-group="gallery">-->
-                            <!--<img src="assets/img/place/f3.jpg" class="img-responsive" alt="thumb-2">-->
-                        <!--</a>-->
-                    <!--</div>-->
-                <!--</div>-->
                 <br>
-                <a href="https://twitter.com/share?url=http%3A%2F%2Fufa42conf.org&text=Буду%20на%20%23ufa42conf%20на%20этой%20неделе" class="btn btn-sm btn-tertiary">Рассказать</a>
+                <a href="twitter:///post?message=Буду%20на%20%23ufa42conf%20на%20этой%20неделе" class="btn btn-sm btn-tertiary">Рассказать</a>
             </article>
         </div>
     </section>
@@ -333,7 +318,6 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-one-page-nav/3.0.0/jquery.nav.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.4/waypoints.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.4/waypoints-sticky.min.js"></script>
-    <!--<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>-->
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.1.3/zepto.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>

@@ -88,7 +88,7 @@
         stuckClass: 'sticky'
     });
 
-    $('.fancybox').fancybox();
+//    $('.fancybox').fancybox();
 
 	});
 	

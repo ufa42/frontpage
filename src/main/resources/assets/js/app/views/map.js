@@ -137,7 +137,7 @@ APP.MapView = Backbone.View.extend({
 
     this.map = new google.maps.Map(document.getElementById('canvas-map'),
       {
-        zoom: 15,
+        zoom: 16,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         scrollwheel: false,
         panControl: false,

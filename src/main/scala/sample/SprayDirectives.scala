@@ -25,7 +25,7 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
   var event = Event(
     "140619",
     Place("ШБ Синергия", 54.7252452, 55.949416, "Уфа, ул. Коммунистическая, 54", ""),
-    Place("Дом №50", 54.726987, 55.940932, "Уфа, ул. Коммунистическая, 50", "4 этаж"),
+    Place("Дуслык", 54.7276034, 55.9494373, "Уфа, ул. Крупской, 9", "2 этаж"),
     List(
       Talk("Альфа версия сайта знакомств за 6 месяцев - работа над ошибками",
         "Some description",
@@ -72,9 +72,17 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
     }
   })
 
+  def detectIOS: HttpHeader => Option[Boolean] = {
+    case h: HttpHeaders.`User-Agent` => Some(h.value.contains("iPhone") || h.value.contains("iPad") || h.value.contains("iPod"))
+    case _ => None
+  }
+
   val route = {
-    (get & path("")) {
-      getFromResource("assets/index.html")
+    (get & path("") & headerValue(detectIOS)) { iOS =>
+      if (iOS)
+        getFromResource("assets/index.ios.html")
+      else
+        getFromResource("assets/index.html")
     } ~
     pathPrefix("api") {
       get {
