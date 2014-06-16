@@ -28,11 +28,11 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
     Place("Дуслык", 54.7276034, 55.9494373, "Уфа, ул. Крупской, 9", "2 этаж"),
     List(
       Talk("Альфа версия сайта знакомств за 6 месяцев - работа над ошибками",
-        "Some description",
+        "",
         User(16135676, "@abdullin", "Rinat Abdullin", "http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg")
       ),
       Talk("Опыт использования Scala для разработки соцсети",
-        "Some description",
+        "",
         User(123111, "@levkhomich", "Lev Khomich", "https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png")
       )
     ),
