@@ -149,7 +149,6 @@ APP.MapView = Backbone.View.extend({
     this.updateMap();
   },
 
-  // populate the html to the dom
   render: function () {
     this.$el.html(_.template($('#mapPanelTemplate').html(), this.event.toJSON()));
     return this;

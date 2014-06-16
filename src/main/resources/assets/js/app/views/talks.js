@@ -22,16 +22,13 @@ APP.LightningTalkRowView = Backbone.View.extend({
 });
 
 APP.TalksView = Backbone.View.extend({
-  // the constructor
   initialize: function (options) {
-    // model is passed through
     this.talks = options.event.get('talks');
     this.lightningTalks = options.event.get('lightningTalks');
 //    this.talks.bind('reset', this.addAll, this);
 //    this.talks.bind('add', this.addOne, this);
   },
 
-  // populate the html to the dom
   render: function () {
     this.$el.html($('#timelineTemplate').html());
     this.addAll();
@@ -39,7 +36,6 @@ APP.TalksView = Backbone.View.extend({
   },
 
   addAll: function () {
-    // clear out the container each time you render index
     this.$el.find('#talks').children().remove();
     this.$el.find('#lightningTalks').children().remove();
     _.each(this.talks.models, $.proxy(this, 'addTalk'));
