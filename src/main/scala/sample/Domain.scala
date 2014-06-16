@@ -53,6 +53,18 @@ case class Tweet(id: Long, creationTime: Long, place: Option[Place], text: Strin
 
 object Tweet extends DefaultJsonProtocol {
   implicit val _ = jsonFormat5(Tweet.apply)
+
+  def apply(t: twitter4j.Status): Tweet =
+    Tweet(
+      t.getId,
+      t.getCreatedAt.getTime,
+      Option(t.getPlace).map(place =>
+        Place(place.getName, t.getGeoLocation.getLatitude, t.getGeoLocation.getLongitude, place.getStreetAddress, "")
+      ),
+      t.getText,
+      User(t.getUser)
+    )
+
 }
 
 case class Tweets(tweets: List[Tweet])

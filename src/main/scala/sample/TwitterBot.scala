@@ -38,21 +38,12 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
     query.setCount(100)
 
     try {
-//      client.getRateLimitStatus("search").get("/search/tweets")
       val result = client.search(query)
       lastId = result.getMaxId
       val limit = result.getRateLimitStatus
 
-      tweets = tweets ::: result.getTweets.filterNot(t => t.getText.startsWith("RT") || t.getText.startsWith("@")).map { t =>
-        val loc = t.getGeoLocation
-        Tweet(
-          t.getId,
-          t.getCreatedAt.getTime,
-          Option(t.getPlace).map(place => Place(place.getName, loc.getLatitude, loc.getLongitude, place.getStreetAddress, "")),
-          t.getText,
-          User(t.getUser)
-        )
-      }.toList.reverse
+      tweets = tweets :::
+        result.getTweets.filterNot(t => t.getText.startsWith("RT") || t.getText.startsWith("@")).map(Tweet(_)).toList.reverse
 
       nextRunAfter = 2 * (if (limit.getRemaining > 0) subscriptions.length * limit.getSecondsUntilReset / limit.getRemaining else 5)
     } catch {
