@@ -17,14 +17,14 @@ strong { font-family: 'Roboto', sans-serif; font-weight: 400; font-style: normal
 
 body { color: #000; font-size: 11pt; background: #fff; margin: 0; }
 p {font-size:11pt; line-height: 20pt; font-weight:300;}
-h1 { font-size: 112px; }
-h2 { font-size: 78px; }
-h3 { font-size: 62px; }
-h4 { font-size: 50px; }
-h5 { font-size: 40px; }
-h6 { font-size: 30px; }
-h7,.h7 { font-size: 24px; }
-h8,.h8 { font-size: 22px; }
+h1 { font-size: 60pt; }
+h2 { font-size: 48pt; }
+h3 { font-size: 36pt; }
+h4 { font-size: 24pt; }
+h5 { font-size: 20pt; }
+h6 { font-size: 16pt; }
+h7,.h7 { font-size: 14pt; }
+h8,.h8 { font-size: 12pt; }
 h1,h2,h3,h4,h5,h6,h7,h8,.h7,.h8 { font-weight: 100; display: block; }
 
 h1, h2, h3 { margin-top: 10px; margin-bottom: 10px; }
@@ -107,6 +107,7 @@ hr.white { border-color: #F3AE9B; }
 #hero { background: url('../img/header-bg.jpg') center center no-repeat;-webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; background-attachment: fixed; min-height: 500px; position: relative; overflow:hidden;}
 #hero .container { position: static; }
 #hero .hero-content { position: absolute; top: 40%; left: 0; right: 0; margin-top: -195px; }
+#hero .hero-content div.img-wrapper { margin-top: 30px; margin-bottom: 20px; }
 #hero hr { width: 12%; border: 0; border-top: 1px solid #FFF; display: inline-block; }
 #hero .hero-small span  { font-size: 18pt; font-weight:300; display: inline-block; margin: 0 20px 15px; position: relative; top: -12px; }
 #hero .hero-small .sep  { width: 15px; display: inline-block; }
@@ -192,7 +193,6 @@ hr.white { border-color: #F3AE9B; }
 #stat .stat { font-size: 100px; color: #e81b23; }
 #stat .icon-wrap { font-size: 38px; line-height: 38px; margin-bottom: -10px; }
 
-#register.section, #newsletter.section { padding-top: 60px; }
 #register { background-image: url('../img/speakers-bg.jpg'); background-repeat: no-repeat; background-position: center; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; }
 
 #elements { text-align: left; }
@@ -348,7 +348,7 @@ label.error { display: block; }
 .location {background:#fff; padding:20px 25px; z-index: 1; opacity: 0.9; }
 .location ul {list-style:none; padding-left:10px;}
 .location li {margin:25px 0px; font-size: 15pt;}
-.location li  i{padding-right:15px; font-size: 15pt;}
+.location li  i{ padding-right:10px; padding-left:10px; font-size: 15pt;}
 #canvas-map { position: absolute; height:700px; width:100%; top: 0;right: 0;bottom: 0;left: 0; z-index: 1; }
 
 #footer { padding: 0; }
@@ -500,62 +500,26 @@ label.error { display: block; }
   #stat {
     background-attachment: initial;
   }
-  #hero {
-    height: 800px;
-    background-attachment: initial;
-  }
-  #hero .hero-content {
-    top: 15%;
-    margin-top: 0;
-  }
-  #hero .hero-content span.fa {
-    font-size: 10pt;
-    top: -1px;
-  }
-  #hero .hero-small {
-    top: 30%;
-  }
-  #hero .hero-small span {
-    font-size: 12pt;
-  }
-  #hero-social {
-    top: 50%;
-  }
-  #schedule .panel {
-    padding-left: 75px;
-    padding-right: 10px;
-  }
+  #hero { height: 800px; background-attachment: initial; }
+  #hero .hero-content { top: 15%; margin-top: 0; }
+  #hero .hero-content span.fa { font-size: 10pt; top: -1px; }
+  #hero .hero-small { top: 30%; }
+  #hero .hero-small span { font-size: 12pt; }
+  #hero-social { top: 50%; }
+  #schedule .panel { padding-left: 75px; padding-right: 10px; }
   #schedule .speaker-wrapper { left: 10px; width: 60px; height: 60px; top: 0;}
   #schedule .panel-group:after { left: 40px; }
   #schedule .panel .panel-title a { font-size: 18px; padding-top: 0; }
   #schedule .panel .panel-heading { padding-bottom: 10px; }
 
-  .sticky-wrapper {
-    height: 0;
-  }
-
-  h3 {
-    font-size: 24pt;
-  }
-
-  h6 {
-    font-size: 18pt;
-  }
-
-  .location li {
-    font-size: 12pt;
-  }
-
-  .big {
-    font-size: 12pt;
-  }
-
-  #stat .stat {
-    font-size: 36pt;
-  }
-
+  .sticky-wrapper { height: 0; }
+  h3 { font-size: 18pt; }
+  h6 { font-size: 16pt; }
+  .location li { font-size: 12pt; }
+  .big { font-size: 12pt;}
+  #stat .stat { font-size: 36pt; }
   #hero .hero-content img { height: 80px; width: 80px; }
-
+  .section { padding-top: 20px; }
 }
 
 @media only screen and (max-width: 1024px) {
