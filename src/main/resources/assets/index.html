@@ -123,7 +123,7 @@
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="counter">
                     <div class="stat"><span class="value"><%= lightningTalksCount %></span></div>
-                    <div class="stat-info">lightning talks</div>
+                    <div class="stat-info"><%= declOfNum(lightningTalksCount, ['блиц-доклад', 'блиц-доклада', 'блиц-докладов']) %></div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6">
@@ -153,10 +153,6 @@
         </div>
     </script>
 
-    <!-- Preloader -->
-    <div id="mask" style="display: none;">
-        <div id="loader" style="display: none;"><img src="assets/img/preloader.gif" alt="preloader"></div>
-    </div>
     <header id="mobileheader" class="navigation-bar-header light visible-xs">
       <div class="container">
         <nav class="navigation">
@@ -175,6 +171,7 @@
         </nav>
       </div>
     </header>
+
     <!-- Hero Section -->
     <section id="hero" class="light" >
       <div class="container">

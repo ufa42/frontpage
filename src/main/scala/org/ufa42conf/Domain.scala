@@ -1,4 +1,4 @@
-package sample
+package org.ufa42conf
 
 import spray.json.DefaultJsonProtocol
 

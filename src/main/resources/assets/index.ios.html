@@ -121,7 +121,7 @@
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="counter">
                     <div class="stat"><span class="value"><%= lightningTalksCount %></span></div>
-                    <div class="stat-info">lightning talks</div>
+                    <div class="stat-info"><%= declOfNum(lightningTalksCount, ['блиц-доклад', 'блиц-доклада', 'блиц-докладов']) %></div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6">
@@ -151,10 +151,6 @@
         </div>
     </script>
 
-    <!-- Preloader -->
-    <div id="mask" style="display: none;">
-        <div id="loader" style="display: none;"><img src="assets/img/preloader.gif" alt="preloader"></div>
-    </div>
     <header id="mobileheader" class="navigation-bar-header light visible-xs">
       <div class="container">
         <nav class="navigation">
@@ -289,7 +285,7 @@
             <h3>Спонсоры</h3>
             <br/>
             <div class="row">
-                <ul class="list-inline">
+                <ul>
                     <li><a href="http://frumatic.com/" target="_blank"><img src="assets/img/sponsor/frumatic-logo.png" alt="Frumatic" /></a></li>
                     <li><a href="http://abdullin.com/" target="_blank"><img src="assets/img/sponsor/abdullin.png" alt="Abdullin" /></a></li>
                 </ul>

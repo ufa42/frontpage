@@ -1,4 +1,4 @@
-package sample
+package org.ufa42conf
 
 import twitter4j._
 import twitter4j.conf.ConfigurationBuilder

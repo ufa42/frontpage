@@ -1,19 +1,15 @@
-package sample
+package org.ufa42conf
 
 import akka.actor.{ActorLogging, Actor, Props, ActorSystem}
 import akka.io.IO
 import scala.concurrent.duration._
 import spray.can.Http
-import spray.client.pipelining._
 import spray.http._
 import spray.httpx.marshalling.Marshaller
 import spray.httpx.unmarshalling._
 import spray.httpx.SprayJsonSupport.sprayJsonMarshaller
 import spray.httpx.SprayJsonSupport.sprayJsonUnmarshaller
 import spray.routing.HttpService
-import scala.util.Random
-import java.util.UUID
-import twitter4j.TwitterException
 
 
 class HttpServiceActor extends Actor with HttpService with ActorLogging {
@@ -79,7 +75,7 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
   twitterBot.addSubscription("#ufa42")
 
   val intentPatterns =
-    """\bсоби?ра,\b(за|под|подо|при?|до)?[ийе]д[уеё]\b,\bбуду\b,бы(ва)?ть\b,\bвизит,\bпосещ,слуша,гости,\bзагляну,
+    """\bсоби?ра,\b(за|под|подо|при?|до)?[ийе]д[уеё]\b,идти,\bбуду\b,бы(ва)?ть\b,\bвизит,\bпосещ,слуша,гости,\bзагляну,
       |\bgo\b,\bgoing\b,\bvisit\b,\bmeet,\bsee\b,\bwill\b""".stripMargin.split(',').toList.map(".*" + _ + ".*")
 
   context.system.scheduler.schedule(5.seconds,4.seconds, new Runnable {
@@ -138,7 +134,7 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
 
 }
 
-object SprayDirectives extends App {
+object Ufa42App extends App {
   val host = "0.0.0.0"
   val port = 8889
 

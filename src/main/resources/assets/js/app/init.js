@@ -42,16 +42,12 @@ function declOfNum(number, titles) {
 
 
 	$(function() {
-    //Preloader
-    app.el['loader'].delay(700).fadeOut();
-    app.el['mask'].delay(1200).fadeOut("slow");
-
 	// Resize based on screen size
 	app.el['window'].resize(function() {
 		app.fn.screenSize();
 	});
 
-    // fade in .back-to-top
+    // back-to-top
     $(window).scroll(function () {
       if ($(this).scrollTop() > 500) {
         app.el['back-to-top'].fadeIn();
@@ -59,8 +55,6 @@ function declOfNum(number, titles) {
         app.el['back-to-top'].fadeOut();
       }
     });
-
-    // scroll body to 0px on click
     app.el['back-to-top'].click(function () {
       app.el['html-body'].animate({
         scrollTop: 0

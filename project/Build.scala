@@ -11,7 +11,7 @@ object ProjectBuild extends Build {
       Defaults.defaultSettings ++
       Seq (
         name := "ufa42",
-        organization := "com.frumatic",
+        organization := "org.ufa42conf",
         version := "0.1",
 
         scalaVersion := "2.10.4",
