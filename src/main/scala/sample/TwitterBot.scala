@@ -10,7 +10,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
 
   private[this] var subscriptions = List[String]()
-  private[this] var lastId = 0L
   private[this] val client = {
     val builder = new ConfigurationBuilder()
     builder.setApplicationOnlyAuthEnabled(true)
@@ -34,12 +33,11 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
     println(s"updating $queryStr feed")
     var nextRunAfter = 30
     val query = new Query(queryStr)
-    query.setSinceId(lastId)
+    query.setSinceId(tweets.map(_.id).max)
     query.setCount(100)
 
     try {
       val result = client.search(query)
-      lastId = result.getMaxId
       val limit = result.getRateLimitStatus
 
       tweets = tweets :::
