@@ -30,45 +30,63 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
     List(
       Talk("Альфа версия сайта знакомств за 6 месяцев - работа над ошибками",
         "",
-        User(16135676, "@abdullin", "Rinat Abdullin", "http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg")
+        User(16135676L, "@abdullin", "Rinat Abdullin", "http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg")
       ),
-      Talk("Опыт использования Scala для разработки соцсети",
+      Talk("Почему мы используем Scala?",
         "",
-        User(123111, "@levkhomich", "Lev Khomich", "https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png")
+        User(2378268950L, "@andrey_feokt", "Андрей Феоктистов", "https://pbs.twimg.com/profile_images/478884565369360384/RevpRhzK.png")
+      ),
+      Talk("HTTP слой со Spray и Akka",
+        "",
+        User(9600972L, "@levkhomich", "Lev Khomich", "https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png")
       )
     ),
     List(
       Talk("Emacs крут",
-        "Some description",
-        User(16135676, "@abdullin", "Rinat Abdullin", "http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg")
+        "",
+        User(16135676L, "@abdullin", "Rinat Abdullin", "http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg")
       ),
       Talk("Objective-C Runtime – вскрытие без наркоза",
-        "Some description",
-        User(12312312, "@MrDarK_AngeL", "Rishat Shamsutdinov", "https://pbs.twimg.com/profile_images/2187811129/image.jpg")
+        "",
+        User(94962222L, "@MrDarK_AngeL", "Rishat Shamsutdinov", "https://pbs.twimg.com/profile_images/2187811129/image.jpg")
       ),
       Talk("Как быстро написать приложение на angular.js? Не писать на angular.js",
-        "Some description",
-        User(16781, "no twitter", "Grigory Leonenko", "https://pp.vk.me/c613522/v613522262/f295/WXWyojalNxo.jpg")
+        "",
+        User(1, "no twitter", "Grigory Leonenko", "https://pp.vk.me/c613522/v613522262/f295/WXWyojalNxo.jpg")
       ),
-      Talk("MongoDB - PHP",
-        "Some description",
-        User(654, "no twitter", "Alexey Kardapoltsev", "https://lh6.googleusercontent.com/-sugMcSpyotA/AAAAAAAAAAI/AAAAAAAAAno/Q5uCER67CnM/s120-c/photo.jpg")
-      ),
+//      Talk("MongoDB - PHP",
+//        "",
+//        User(654, "no twitter", "Alexey Kardapoltsev", "https://lh6.googleusercontent.com/-sugMcSpyotA/AAAAAAAAAAI/AAAAAAAAAno/Q5uCER67CnM/s120-c/photo.jpg")
+//      ),
       Talk("Нужно ли реализовывать жизненный цикл для данных?",
-        "Some description",
-        User(412, "no twitter", "Anjei Katkov", "assets/img/logo.png")
+        "",
+        User(2, "no twitter", "Anjei Katkov", "assets/img/logo.png")
+      ),
+      Talk("Особенности интернационализации SPA (single page applications)",
+        "",
+        User(568182702L, "izuick", "Ruslan Zuick", "https://pbs.twimg.com/profile_images/2181307609/IMG_10832.gif")
       )
     ),
-    DateTime(2014, 6, 19, 19 - 6).clicks
+    DateTime(2014, 6, 19, 19 - 6).clicks,
+    List(
+      Question(null, "Оцените уровень проведения конференции",
+        List(Answer(1, "отлично"), Answer(2, "хорошо"), Answer(3, "нормально"), Answer(4, "плохо")), 1)
+    )
   )
   def events = List(event).sortBy(_.time)
 
   val twitterBot = new TwitterBot("nnrqExJROGCpBglV5xazTtzQ4", "rXLGuo1fSkHPEugIpDL2aeUSOjUASXEimjsSbLSU2ic3iHNqPD", context.system.scheduler)
   twitterBot.addSubscription("#ufa42")
 
+  val intentPatterns =
+    """\bсоби?ра,\b(за|под|подо|при?|до)?[ийе]д[уеё]\b,\bбуду\b,бы(ва)?ть\b,\bвизит,\bпосещ,слуша,гости,\bзагляну,
+      |\bgo\b,\bgoing\b,\bvisit\b,\bmeet,\bsee\b,\bwill\b""".stripMargin.split(',').toList.map(".*" + _ + ".*")
+
   context.system.scheduler.schedule(5.seconds,4.seconds, new Runnable {
     override def run(): Unit = {
-      val newParticipants = twitterBot.tweets.map(_.user.id).toSet -- event.participants.map(_.id)
+      val intentTweets = twitterBot.tweets.
+        filter(t => intentPatterns.exists(t.text.toLowerCase.matches)).filterNot(_.user.name.endsWith("ufa42conf"))
+      val newParticipants = intentTweets.map(_.user.id).toSet -- event.participants.map(_.id)
       if (!newParticipants.isEmpty) {
         println("new participants: " + newParticipants)
         try {
