@@ -33,7 +33,9 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
     println(s"updating $queryStr feed")
     var nextRunAfter = 30
     val query = new Query(queryStr)
-    query.setSinceId(tweets.map(_.id).max)
+
+    if (!tweets.isEmpty)
+      query.setSinceId(tweets.map(_.id).max)
     query.setCount(100)
 
     try {
