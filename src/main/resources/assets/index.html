@@ -111,13 +111,13 @@
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="counter">
                     <div class="stat"><span class="value"><%= officialPartDuration %></span></div>
-                    <div class="stat-info">часа</div>
+                    <div class="stat-info"><%= declOfNum(officialPartDuration, ['час', 'часа', 'часов']) %></div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="counter">
                     <div class="stat"><span class="value"><%= talksCount %></span></div>
-                    <div class="stat-info">доклада</div>
+                    <div class="stat-info"><%= declOfNum(talksCount, ['доклад', 'доклада', 'докладов']) %></div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-3 col-xs-6">
@@ -129,7 +129,7 @@
             <div class="col-md-3 col-sm-3 col-xs-6">
                 <div class="counter">
                     <div class="stat"><span class="value"><%= participantsCount %></span></div>
-                    <div class="stat-info">участников</div>
+                    <div class="stat-info"><%= declOfNum(participantsCount, ['участник', 'участника', 'участников']) %></div>
                 </div>
             </div>
         </div>
