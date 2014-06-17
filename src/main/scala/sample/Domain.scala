@@ -30,7 +30,7 @@ object Answer extends DefaultJsonProtocol {
   implicit val _ = jsonFormat2(Answer.apply)
 }
 
-case class Question(id: String, text: String, answers: List[Answer], anwerLimit: Int)
+case class Question(id: String, text: String, answers: List[Answer], answerLimit: Int)
 
 object Question extends DefaultJsonProtocol {
   implicit val _ = jsonFormat4(Question.apply)
@@ -54,7 +54,8 @@ object Event extends DefaultJsonProtocol {
 
   def apply(id: String, talksPlace: Place, beersPlace: Place, talks: List[Talk], lightningTalks: List[Talk], time: Long, questions: List[Question]): Event = {
     val speakers = (talks.map(_.speaker) ::: lightningTalks.map(_.speaker)).distinct
-    Event(id, talksPlace, beersPlace, talks, lightningTalks, time, speakers, questions)
+    Event(id, talksPlace, beersPlace, talks, lightningTalks, time, speakers,
+      questions.zipWithIndex.map { case (q, i) => q.copy(id = id + '-' + i) })
   }
 }
 
