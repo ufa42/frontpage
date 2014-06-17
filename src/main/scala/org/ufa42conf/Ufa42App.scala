@@ -26,29 +26,29 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
     List(
       Talk("Альфа версия сайта знакомств за 6 месяцев - работа над ошибками",
         "",
-        User(16135676L, "@abdullin", "Rinat Abdullin", "http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg")
+        User(16135676L, "@abdullin", "Rinat Abdullin", Some("http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg"))
       ),
       Talk("Почему мы используем Scala?",
         "",
-        User(2378268950L, "@andrey_feokt", "Андрей Феоктистов", "https://pbs.twimg.com/profile_images/478884565369360384/RevpRhzK.png")
+        User(2378268950L, "@andrey_feokt", "Андрей Феоктистов", Some("https://pbs.twimg.com/profile_images/478884565369360384/RevpRhzK.png"))
       ),
       Talk("HTTP слой со Spray и Akka",
         "",
-        User(9600972L, "@levkhomich", "Lev Khomich", "https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png")
+        User(9600972L, "@levkhomich", "Lev Khomich", Some("https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png"))
       )
     ),
     List(
       Talk("Emacs крут",
         "",
-        User(16135676L, "@abdullin", "Rinat Abdullin", "http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg")
+        User(16135676L, "@abdullin", "Rinat Abdullin", Some("http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg"))
       ),
       Talk("Objective-C Runtime – вскрытие без наркоза",
         "",
-        User(94962222L, "@MrDarK_AngeL", "Rishat Shamsutdinov", "https://pbs.twimg.com/profile_images/2187811129/image.jpg")
+        User(94962222L, "@MrDarK_AngeL", "Rishat Shamsutdinov", Some("https://pbs.twimg.com/profile_images/2187811129/image.jpg"))
       ),
       Talk("Как быстро написать приложение на angular.js? Не писать на angular.js",
         "",
-        User(1, "no twitter", "Grigory Leonenko", "https://pp.vk.me/c613522/v613522262/f295/WXWyojalNxo.jpg")
+        User(1, "no twitter", "Grigory Leonenko", Some("https://pp.vk.me/c613522/v613522262/f295/WXWyojalNxo.jpg"))
       ),
 //      Talk("MongoDB - PHP",
 //        "",
@@ -56,11 +56,11 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
 //      ),
       Talk("Нужно ли реализовывать жизненный цикл для данных?",
         "",
-        User(2, "no twitter", "Anjei Katkov", "assets/img/logo.png")
+        User(2, "no twitter", "Anjei Katkov", None)
       ),
       Talk("Особенности интернационализации SPA (single page applications)",
         "",
-        User(568182702L, "izuick", "Ruslan Zuick", "https://pbs.twimg.com/profile_images/2181307609/IMG_10832.gif")
+        User(568182702L, "izuick", "Ruslan Zuick", Some("https://pbs.twimg.com/profile_images/2181307609/IMG_10832.gif"))
       )
     ),
     DateTime(2014, 6, 19, 19 - 6).clicks,
@@ -120,8 +120,8 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
               complete(HttpResponse(StatusCodes.NotFound))
           }
         } ~
-        path("tweets") {
-          complete(Tweets(twitterBot.tweets))
+        (path("tweets") & parameter('limit.as[Int].?)) { limit =>
+          complete(Tweets(twitterBot.tweets.takeRight(limit.getOrElse(3))))
         }
       }
     } ~

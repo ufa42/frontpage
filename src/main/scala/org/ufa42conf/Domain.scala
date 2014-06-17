@@ -3,13 +3,13 @@ package org.ufa42conf
 import spray.json.DefaultJsonProtocol
 
 
-case class User(id: Long, name: String, fullname: String, avatarUrl: String)
+case class User(id: Long, name: String, fullname: String, avatarUrl: Option[String])
 
 object User extends DefaultJsonProtocol {
   implicit val _ = jsonFormat4(User.apply)
 
   def apply(user: twitter4j.User): User =
-    User(user.getId, user.getScreenName, user.getName, user.getBiggerProfileImageURLHttps)
+    User(user.getId, user.getScreenName, user.getName, Some(user.getProfileImageURLHttps))
 }
 
 case class Talk(title: String, description: String, speaker: User)

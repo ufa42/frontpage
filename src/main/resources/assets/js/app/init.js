@@ -1,53 +1,34 @@
 function declOfNum(number, titles) {
-    var cases = [2, 0, 1, 1, 1, 2];
-    number = Math.round(number)
-    return titles[ (number%100>4 && number%100<20)? 2 : cases[(number%10<5)?number%10:5] ];
+  var cases = [2, 0, 1, 1, 1, 2];
+  number = Math.round(number);
+  return titles[(number % 100 > 4 && number % 100 < 20) ? 2 : cases[(number % 10 < 5) ? number % 10 : 5]];
 }
 
 (function(){
+  window.app = {el : {}, fn : {}};
+  app.el['window'] = $(window);
+  app.el['document'] = $(document);
+  app.el['back-to-top'] = $('.back-to-top');
+  app.el['html-body'] = $('html,body');
+  app.el['loader'] = $('#loader');
+  app.el['mask'] = $('#mask');
 
+  var router = new APP.AppRouter({
+    eventList: new APP.EventCollection(),
+    tweets: new APP.TweetCollection()
+  });
+  router.eventList.fetch({reset: true, success: function() {
+    //Backbone.history.start();
+    router.index();
+  }})
+  setInterval(function() { router.eventList.fetch({reset: true}); }, 5000);
+  setInterval(function() { if (app.el['window'].width() > 1024) router.tweets.fetch({ add: true}); }, 2000);
 
-        var router = new APP.AppRouter({
-          eventList: new APP.EventCollection(),
-          tweets: new APP.TweetCollection()
-        });
-        router.eventList.fetch({reset: true, success: function() {
-         //Backbone.history.start();
-         router.index();
-        } })
-        setInterval(function() { router.eventList.fetch({reset: true}); }, 5000);
-        setInterval(function() { router.tweets.fetch({ add: true}); }, 2000);
-        window.onresize = function(event) {
-          router.onResize();
-        };
+  $(function() {
+    app.el['window'].resize(function() {
+      router.onResize();
+    });
 
-    window.app = {el : {}, fn : {}};
-    app.el['window'] = $(window);
-    app.el['document'] = $(document);
-    app.el['back-to-top'] = $('.back-to-top');
-    app.el['html-body'] = $('html,body');
-    app.el['loader'] = $('#loader');
-    app.el['mask'] = $('#mask');
-
-	app.fn.screenSize = function() {
-		var size, width = app.el['window'].width();
-		if(width < 320) size = "Not supported";
-		else if(width < 480) size = "Mobile portrait";
-		else if(width < 768) size = "Mobile landscape";
-		else if(width < 960) size = "Tablet";
-		else size = "Desktop";
-		if (width < 768){$('.animated').removeClass('animated').removeClass('hiding');}
-	};
-
-
-
-	$(function() {
-	// Resize based on screen size
-	app.el['window'].resize(function() {
-		app.fn.screenSize();
-	});
-
-    // back-to-top
     $(window).scroll(function () {
       if ($(this).scrollTop() > 500) {
         app.el['back-to-top'].fadeIn();
@@ -58,38 +39,34 @@ function declOfNum(number, titles) {
     app.el['back-to-top'].click(function () {
       app.el['html-body'].animate({
         scrollTop: 0
-      }, 1500);
+      }, 1000);
       return false;
     });
 
     $('#mobileheader').html($('#header').html());
 
     function heroInit() {
-        var hero        = jQuery('#hero'),
-            winHeight   = jQuery(window).height(),
-            heroHeight  = winHeight;
-
-            hero.css({height: heroHeight+"px"});
-      };
+      jQuery('#hero').css({ height: app.el['window'].height() + "px" });
+    };
 
     jQuery(window).on("resize", heroInit);
     jQuery(document).on("ready", heroInit);
 
     $('.navigation-bar').onePageNav({
-        currentClass: 'active',
-        changeHash: true,
-        scrollSpeed: 750,
-        scrollThreshold: 0.5,
-        easing: 'swing'
+      currentClass: 'active',
+      changeHash: true,
+      scrollSpeed: 1500,
+      scrollThreshold: 0.5,
+      easing: 'swing'
     });
 
     $('#header').waypoint('sticky', {
-        wrapper: '<div class="sticky-wrapper" />',
-        stuckClass: 'sticky'
+      wrapper: '<div class="sticky-wrapper" />',
+      stuckClass: 'sticky'
     });
 
 //    $('.fancybox').fancybox();
 
-	});
+  });
 	
 })();

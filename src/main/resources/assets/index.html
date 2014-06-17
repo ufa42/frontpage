@@ -40,7 +40,6 @@
             <div class="img-wrapper">
                 <img src="assets/img/42.png">
             </div>
-            <!--<div class="hero-big">42</div>-->
             <div class="hero-normal">Обмен опытом разработки и дизайна ПО</div>
         </div>
 
@@ -74,7 +73,7 @@
     <script type="text/template" id="talkTemplate">
         <div class="panel panel-default">
             <div class="speaker-wrapper">
-                <img src="<%= speaker.avatarUrl %>" class="img-responsive" >
+                <img src="<%= (typeof speaker.avatarUrl == 'undefined' ? 'assets/img/logo.png' : speaker.avatarUrl) %>" class="img-responsive" >
             </div>
             <p class="author"><a href="https://twitter.com/<%= speaker.name %>" target="_blank"><strong> <%= speaker.fullname %></strong></a></p>
             <div class="panel-heading">
@@ -91,7 +90,7 @@
     <script type="text/template" id="lightningTalkTemplate">
         <div class="panel panel-default">
             <div class="speaker-wrapper">
-                <img src="<%= speaker.avatarUrl %>" class="img-responsive" >
+                <img src="<%= (typeof speaker.avatarUrl == 'undefined' ? 'assets/img/logo.png' : speaker.avatarUrl) %>" class="img-responsive" >
             </div>
             <i class="fa fa-bolt"></i>
             <p class="author"><a href="https://twitter.com/<%= speaker.name %>" target="_blank"><strong><%= speaker.fullname %></strong></a></p>

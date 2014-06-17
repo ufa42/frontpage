@@ -22,7 +22,6 @@ APP.MainView = Backbone.View.extend({
 
   render: function () {
     this.$el.html(_.template($('#mainTemplate').html(), this.event.toJSON()));
-//    this.$el.html($('#mainTemplate').html(), this.event.toJSON());
     return this;
   },
 
