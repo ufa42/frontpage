@@ -76,7 +76,7 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
 
   val intentPatterns =
     """\bсоби?ра,\b(за|подо?|при?|до|по)?[ийе]д[уеё]\b,идти,\bбуду\b,бы(ва)?ть\b,\bвизит,\bпосещ,слуша,гости,\bзагляну,
-      |\bgo\b,\bgoing\b,\bvisit\b,\bmeet,\bsee\b,\bwill\b""".stripMargin.split(',').toList.map(".*" + _ + ".*")
+      |\bgo,\bvisit,\bmeet,\bsee,\bwill,\battend""".stripMargin.split(',').toList.map(".*" + _ + ".*")
 
   context.system.scheduler.schedule(5.seconds,4.seconds, new Runnable {
     override def run(): Unit = {
@@ -85,7 +85,7 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
           intentPatterns.find(p => t.text.toLowerCase.matches(".*" + p + ".*")) match {
             case Some(p) =>
 //              !Pattern.compile(p).matcher(t.text.toLowerCase).replaceAll("$").contains("не $")
-              !t.text.toLowerCase.matches(".*\\bне[ ]+" + p.substring(2))
+              !t.text.toLowerCase.matches(".*\\b(не|not)[ ]+" + p.substring(2))
             case _ =>
               false
           }
