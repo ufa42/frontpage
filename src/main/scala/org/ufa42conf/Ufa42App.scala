@@ -96,8 +96,9 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
         try {
           event = event.copy(participants = twitterBot.fetchUsers(newParticipants) ::: event.participants)
         } catch {
-          case _: Throwable =>
+          case t: Throwable =>
             // ignore it
+            t.printStackTrace()
         }
       }
     }
