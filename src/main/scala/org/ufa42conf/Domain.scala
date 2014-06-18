@@ -75,7 +75,7 @@ object Tweet extends DefaultJsonProtocol {
       t.getId,
       t.getCreatedAt.getTime,
       Option(t.getPlace).map(place =>
-        Place(place.getName, t.getGeoLocation.getLatitude, t.getGeoLocation.getLongitude, place.getStreetAddress, "")
+        Place(place.getName, t.getGeoLocation.getLatitude, t.getGeoLocation.getLongitude, place.getFullName, "")
       ),
       t.getText,
       User(t.getUser)
