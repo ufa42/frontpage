@@ -14,7 +14,7 @@ APP.StatsView = Backbone.View.extend({
     var stats = event.get('stats');
     var talksCount = event.get('talks').length;
     var lightningTalksCount = event.get('lightningTalks').length;
-    var timeHrs = (talksCount * 40 + lightningTalksCount * 7 + 20) / 60;
+    var timeHrs = (60 + lightningTalksCount * 7 + 20) / 60;
     this.stats = {
       officialPartDuration: Math.round(timeHrs * 2) / 2.0,
       talksCount: talksCount,
