@@ -75,13 +75,21 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
   twitterBot.addSubscription("#ufa42")
 
   val intentPatterns =
-    """\bсоби?ра,\b(за|под|подо|при?|до)?[ийе]д[уеё]\b,идти,\bбуду\b,бы(ва)?ть\b,\bвизит,\bпосещ,слуша,гости,\bзагляну,
+    """\bсоби?ра,\b(за|подо?|при?|до|по)?[ийе]д[уеё]\b,идти,\bбуду\b,бы(ва)?ть\b,\bвизит,\bпосещ,слуша,гости,\bзагляну,
       |\bgo\b,\bgoing\b,\bvisit\b,\bmeet,\bsee\b,\bwill\b""".stripMargin.split(',').toList.map(".*" + _ + ".*")
 
   context.system.scheduler.schedule(5.seconds,4.seconds, new Runnable {
     override def run(): Unit = {
       val intentTweets = twitterBot.tweets.
-        filter(t => intentPatterns.exists(t.text.toLowerCase.matches)).filterNot(_.user.name.endsWith("ufa42conf"))
+        filter { t =>
+          intentPatterns.find(p => t.text.toLowerCase.matches(".*" + p + ".*")) match {
+            case Some(p) =>
+//              !Pattern.compile(p).matcher(t.text.toLowerCase).replaceAll("$").contains("не $")
+              !t.text.toLowerCase.matches(".*\\bне[ ]+" + p.substring(2))
+            case _ =>
+              false
+          }
+        }.filterNot(_.user.name.endsWith("ufa42conf"))
       val newParticipants = intentTweets.map(_.user.id).toSet -- event.participants.map(_.id)
       if (!newParticipants.isEmpty) {
         println("new participants: " + newParticipants)
