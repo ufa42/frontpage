@@ -72,6 +72,8 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
   )
   def events = List(event).sortBy(_.time)
 
+  var polls = List[PollResult]()
+
   val twitterBot = new TwitterBot("nnrqExJROGCpBglV5xazTtzQ4", "rXLGuo1fSkHPEugIpDL2aeUSOjUASXEimjsSbLSU2ic3iHNqPD", context.system.scheduler)
   twitterBot.addSubscription("#ufa42")
 
@@ -110,6 +112,11 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
     case _ => None
   }
 
+  def savePoll(poll: PollResult): StatusCode = {
+    polls ::= poll
+    StatusCodes.OK
+  }
+
   val route = dynamic {
     (get & path("") & headerValue(detectIOS)) { iOS =>
       if (iOS)
@@ -132,6 +139,12 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
         } ~
         (path("tweets") & parameter('limit.as[Int].?)) { limit =>
           complete(Tweets(twitterBot.tweets.takeRight(limit.getOrElse(3))))
+        } ~
+        (path("poll") & post) {
+          handleWith(savePoll)
+        } ~
+        (path("polls---123") & post) {
+          complete(polls)
         }
       }
     } ~

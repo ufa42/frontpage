@@ -36,7 +36,11 @@ object Question extends DefaultJsonProtocol {
   implicit val _ = jsonFormat4(Question.apply)
 }
 
+case class PollResult(answers: Map[String, String])
 
+object PollResult extends DefaultJsonProtocol {
+  implicit val _ = jsonFormat1(PollResult.apply)
+}
 
 case class Event(
   id: String,
