@@ -12,10 +12,10 @@ object User extends DefaultJsonProtocol {
     User(user.getId, user.getScreenName, user.getName, Some(user.getOriginalProfileImageURLHttps))
 }
 
-case class Talk(title: String, description: String, speaker: User)
+case class Talk(title: String, description: String, speaker: User, slidesUrl: String = "#")
 
 object Talk extends DefaultJsonProtocol {
-  implicit val _ = jsonFormat3(Talk.apply)
+  implicit val _ = jsonFormat4(Talk.apply)
 }
 
 case class Place(title: String, lat: Double, lon: Double, address: String, description: String)

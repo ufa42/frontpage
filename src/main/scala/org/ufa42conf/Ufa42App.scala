@@ -34,7 +34,8 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
       ),
       Talk("HTTP слой со Spray и Akka",
         "",
-        User(9600972L, "@levkhomich", "Lev Khomich", Some("https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png"))
+        User(9600972L, "@levkhomich", "Lev Khomich", Some("https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png")),
+        "assets/talks/spray/spray-intro.html"
       )
     ),
     List(
