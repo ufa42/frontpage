@@ -1,11 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
-@import url(https://fonts.googleapis.com/css?family=Carrois+Gothic);
-@font-face {
-  font-family: 'Carrois Gothic';
-  /*src: url("../../lib/font/league_gothic-webfont.eot");
-  src: url("../../lib/font/league_gothic-webfont.eot?#iefix") format("embedded-opentype"), url("../../lib/font/league_gothic-webfont.woff") format("woff"), url("../../lib/font/league_gothic-webfont.ttf") format("truetype"), url("../../lib/font/league_gothic-webfont.svg#LeagueGothicRegular") format("svg");*/
-  font-weight: normal;
-  font-style: normal; }
+@import url(https://fonts.googleapis.com/css?family=Roboto:300&subset=latin,cyrillic);
 
 html * {
   color-profile: sRGB;
@@ -15,15 +9,15 @@ html * {
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: #002b36;
-  background-color: #002b36; }
+  background: #36454F;
+  background-color: #36454F; }
 
 .reveal {
-  font-family: "Lato", sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 36px;
   font-weight: 200;
   letter-spacing: -0.02em;
-  color: #93a1a1; }
+  color: #EBEBEB; }
 
 ::selection {
   color: white;
@@ -44,7 +38,6 @@ body {
   font-family: "League Gothic", Impact, sans-serif;
   line-height: 0.9em;
   letter-spacing: 0.02em;
-  /*text-transform: uppercase;*/
   text-shadow: none; }
 
 .reveal h1 {
@@ -169,7 +162,7 @@ body {
   background: none;
   font-size: 1.2em;
   line-height: 1.1em;
-  max-height: 420px; }
+  max-height: 520px; }
 
 .reveal small i {
   vertical-align: baseline; }
