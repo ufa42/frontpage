@@ -140,12 +140,12 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
         (path("tweets") & parameter('limit.as[Int].?)) { limit =>
           complete(Tweets(twitterBot.tweets.takeRight(limit.getOrElse(3))))
         } ~
-        (path("poll") & post) {
-          handleWith(savePoll)
-        } ~
-        (path("polls---123") & post) {
+        path("polls---123") {
           complete(polls)
         }
+      } ~
+      (path("poll") & post) {
+        handleWith(savePoll)
       }
     } ~
     get {
