@@ -27,15 +27,15 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
   var polls = List[PollResult]()
 
   val twitterBot = new TwitterBot("nnrqExJROGCpBglV5xazTtzQ4", "rXLGuo1fSkHPEugIpDL2aeUSOjUASXEimjsSbLSU2ic3iHNqPD", context.system.scheduler)
+
   twitterBot.addSubscription("#ufa42")
+  addEvent(event0)
+  addEvent(event1)
+  addEvent(event2)
 
   val intentPatterns =
     """\bсоби?ра,\b(за|подо?|при?|до|по)?[ийе]д[уеё]\b,идти,\bбуду\b,бы(ва)?ть\b,\bвизит,\bпосещ,слуша,гости,\bзагляну,
       |\bgo,\bvisit,\bmeet,\bsee,\bwill,\battend""".stripMargin.split(',').toList.map(".*" + _ + ".*")
-
-  addEvent(event0)
-  addEvent(event1)
-  addEvent(event2)
 
   context.system.scheduler.schedule(5.seconds,4.seconds, new Runnable {
     override def run(): Unit = {
@@ -48,7 +48,7 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
               false
           }
         }.filterNot(_.user.name.endsWith("ufa42conf"))
-      events.sliding(2).foreach { case List(prevEvent, event) =>
+      events.sliding(2).foreach { case List(event, prevEvent) =>
         intentTweets.filter(t => t.creationTime > prevEvent.time && t.creationTime < event.time).map(_.user) match {
           case Nil =>
           case newAttendees =>
@@ -69,8 +69,8 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
       case s if s.isEmpty =>
       case delta =>
         println(s"new attendees for event ${event.id}: " + delta.map(_.name))
+        attendees = attendees.updated(event, attendees(event) ++ newAttendees)
     }
-    attendees = attendees.updated(event, attendees(event) ++ newAttendees)
   }
 
   def addEvent(event: Event): Unit = {
