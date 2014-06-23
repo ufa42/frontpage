@@ -14,63 +14,15 @@ import spray.routing.HttpService
 
 class HttpServiceActor extends Actor with HttpService with ActorLogging {
 
+  import ConfEvents._
+
   implicit def executionContext = actorRefFactory.dispatcher
 
   def actorRefFactory = context
   def receive = runRoute(route)
 
-  var event = Event(
-    "140619",
-    Place("ШБ Синергия", 54.7252452, 55.949416, "Уфа, ул. Коммунистическая, 54", ""),
-    Place("Дуслык", 54.7276034, 55.9494373, "Уфа, ул. Крупской, 9", "2 этаж"),
-    List(
-      Talk("Альфа версия сайта знакомств за 6 месяцев - работа над ошибками",
-        "",
-        User(16135676L, "@abdullin", "Rinat Abdullin", Some("http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg"))
-      ),
-      Talk("Почему мы используем Scala?",
-        "",
-        User(2378268950L, "@andrey_feokt", "Андрей Феоктистов", Some("https://pbs.twimg.com/profile_images/478884565369360384/RevpRhzK.png"))
-      ),
-      Talk("HTTP слой со Spray и Akka",
-        "",
-        User(9600972L, "@levkhomich", "Lev Khomich", Some("https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png")),
-        "assets/talks/spray/spray-intro.html"
-      )
-    ),
-    List(
-      Talk("Emacs крут",
-        "",
-        User(16135676L, "@abdullin", "Rinat Abdullin", Some("http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg"))
-      ),
-      Talk("Objective-C Runtime – вскрытие без наркоза",
-        "",
-        User(94962222L, "@MrDarK_AngeL", "Rishat Shamsutdinov", Some("https://pbs.twimg.com/profile_images/2187811129/image.jpg"))
-      ),
-      Talk("Как быстро написать приложение на angular.js? Не писать на angular.js",
-        "",
-        User(1, "no twitter", "Grigory Leonenko", Some("https://pp.vk.me/c613522/v613522262/f295/WXWyojalNxo.jpg"))
-      ),
-//      Talk("MongoDB - PHP",
-//        "",
-//        User(654, "no twitter", "Alexey Kardapoltsev", "https://lh6.googleusercontent.com/-sugMcSpyotA/AAAAAAAAAAI/AAAAAAAAAno/Q5uCER67CnM/s120-c/photo.jpg")
-//      ),
-      Talk("Нужно ли реализовывать жизненный цикл для данных?",
-        "",
-        User(2, "no twitter", "Anjei Katkov", None)
-      ),
-      Talk("Особенности интернационализации SPA (single page applications)",
-        "",
-        User(568182702L, "izuick", "Ruslan Zuick", Some("https://pbs.twimg.com/profile_images/2181307609/IMG_10832.gif"))
-      )
-    ),
-    DateTime(2014, 6, 19, 19 - 6).clicks,
-    List(
-      Question(null, "Оцените уровень проведения конференции",
-        List(Answer(1, "отлично"), Answer(2, "хорошо"), Answer(3, "нормально"), Answer(4, "плохо")), 1)
-    )
-  )
-  def events = List(event).sortBy(_.time)
+  var attendees = Map[Event, Set[User]]().withDefaultValue(Set.empty)
+  var events = List[Event]()
 
   var polls = List[PollResult]()
 
@@ -81,31 +33,52 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
     """\bсоби?ра,\b(за|подо?|при?|до|по)?[ийе]д[уеё]\b,идти,\bбуду\b,бы(ва)?ть\b,\bвизит,\bпосещ,слуша,гости,\bзагляну,
       |\bgo,\bvisit,\bmeet,\bsee,\bwill,\battend""".stripMargin.split(',').toList.map(".*" + _ + ".*")
 
+  addEvent(event0)
+  addEvent(event1)
+  addEvent(event2)
+
   context.system.scheduler.schedule(5.seconds,4.seconds, new Runnable {
     override def run(): Unit = {
       val intentTweets = twitterBot.tweets.
         filter { t =>
           intentPatterns.find(p => t.text.toLowerCase.matches(".*" + p + ".*")) match {
             case Some(p) =>
-//              !Pattern.compile(p).matcher(t.text.toLowerCase).replaceAll("$").contains("не $")
               !t.text.toLowerCase.matches(".*\\b(не|not)[ ]+" + p.substring(2))
             case _ =>
               false
           }
         }.filterNot(_.user.name.endsWith("ufa42conf"))
-      val newParticipants = intentTweets.map(_.user.id).toSet -- event.participants.map(_.id)
-      if (!newParticipants.isEmpty) {
-        println("new participants: " + newParticipants)
-        try {
-          event = event.copy(participants = twitterBot.fetchUsers(newParticipants) ::: event.participants)
-        } catch {
-          case t: Throwable =>
-            // ignore it
-            t.printStackTrace()
+      events.sliding(2).foreach { case List(prevEvent, event) =>
+        intentTweets.filter(t => t.creationTime > prevEvent.time && t.creationTime < event.time).map(_.user) match {
+          case Nil =>
+          case newAttendees =>
+            try {
+              addAttendees(event, newAttendees.toSet)
+            } catch {
+              case t: Throwable =>
+                // ignore it
+                t.printStackTrace()
+            }
         }
       }
     }
   })
+
+  def addAttendees(event: Event, newAttendees: Set[User]): Unit = {
+    newAttendees.filterNot(attendees(event).contains) match {
+      case s if s.isEmpty =>
+      case delta =>
+        println(s"new attendees for event ${event.id}: " + delta.map(_.name))
+    }
+    attendees = attendees.updated(event, attendees(event) ++ newAttendees)
+  }
+
+  def addEvent(event: Event): Unit = {
+    val speakers = event.talks.map(_.speaker) ::: event.lightningTalks.map(_.speaker)
+    addAttendees(event, speakers.toSet)
+    events = (event :: events).sortBy(-_.time)
+  }
+
 
   def detectIOS: HttpHeader => Option[Boolean] = {
     case h: HttpHeaders.`User-Agent` => Some(h.value.contains("iPhone") || h.value.contains("iPad") || h.value.contains("iPod"))
@@ -127,7 +100,9 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
     pathPrefix("api") {
       get {
         path("events") {
-          complete(Events(events))
+          complete(Events(
+            events.map(event => EventDto(event, attendees(event)))
+          ))
         } ~
         path("events" / Segment) { case id =>
           events.find(_.id == id) match {

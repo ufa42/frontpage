@@ -19,7 +19,7 @@ APP.StatsView = Backbone.View.extend({
       officialPartDuration: Math.round(timeHrs * 2) / 2.0,
       talksCount: talksCount,
       lightningTalksCount: lightningTalksCount,
-      participantsCount: event.get('participants').length,
+      attendeesCount: event.get('attendees').length,
     };
     this.render();
   },

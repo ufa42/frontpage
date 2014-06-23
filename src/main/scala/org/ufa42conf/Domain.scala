@@ -3,7 +3,14 @@ package org.ufa42conf
 import spray.json.DefaultJsonProtocol
 
 
-case class User(id: Long, name: String, fullname: String, avatarUrl: Option[String])
+case class User(id: Long, name: String, fullname: String, avatarUrl: Option[String]) {
+  override def hashCode(): Int = id.hashCode()
+  override def equals(obj: scala.Any): Boolean =
+    obj match {
+      case that: User => that.id == id
+      case _ => false
+    }
+}
 
 object User extends DefaultJsonProtocol {
   implicit val _ = jsonFormat4(User.apply)
@@ -48,22 +55,33 @@ case class Event(
   beersPlace: Place,
   talks: List[Talk], 
   lightningTalks: List[Talk], 
-  time: Long, 
-  participants: List[User],
+  time: Long,
   questions: List[Question]
 )
 
 object Event extends DefaultJsonProtocol {
-  implicit val _ = jsonFormat8(Event.apply)
-
-  def apply(id: String, talksPlace: Place, beersPlace: Place, talks: List[Talk], lightningTalks: List[Talk], time: Long, questions: List[Question]): Event = {
-    val speakers = (talks.map(_.speaker) ::: lightningTalks.map(_.speaker)).distinct
-    Event(id, talksPlace, beersPlace, talks, lightningTalks, time, speakers,
-      questions.zipWithIndex.map { case (q, i) => q.copy(id = id + '-' + i) })
-  }
+  implicit val _ = jsonFormat7(Event.apply)
 }
 
-case class Events(events: List[Event])
+case class EventDto(
+  id: String,
+  talksPlace: Place,
+  beersPlace: Place,
+  talks: List[Talk],
+  lightningTalks: List[Talk],
+  time: Long,
+  attendees: Set[User],
+  questions: List[Question]
+)
+
+object EventDto extends DefaultJsonProtocol {
+  implicit val _ = jsonFormat8(EventDto.apply)
+
+  def apply(event: Event, attendees: Set[User]): EventDto =
+    EventDto(event.id, event.talksPlace, event.beersPlace, event.talks, event.lightningTalks, event.time, attendees, event.questions)
+}
+
+case class Events(events: List[EventDto])
 
 object Events extends DefaultJsonProtocol {
   implicit val _ = jsonFormat1(Events.apply)
