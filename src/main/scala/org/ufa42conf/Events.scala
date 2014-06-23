@@ -66,9 +66,13 @@ object ConfEvents {
     Place("ШБ Синергия", 54.7252452, 55.949416, "Уфа, ул. Коммунистическая, 54", ""),
     Place("Дуслык", 54.7276034, 55.9494373, "Уфа, ул. Крупской, 9", "2 этаж"),
     List(
-      Talk("Ловим баги в распределённой системе",
+      Talk("Отладка распределенных систем",
         "",
         User(9600972L, "levkhomich", "Lev Khomich", Some("https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png"))
+      ),
+      Talk("Распределенные event-driven системы",
+        "",
+        User(16135676L, "abdullin", "Rinat Abdullin", Some("http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg"))
       )
     ),
     List(
