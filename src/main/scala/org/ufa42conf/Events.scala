@@ -87,11 +87,11 @@ object ConfEvents {
       Talk("iOS: не используйте Storyboard",
         "",
         User(94962222L, "MrDarK_AngeL", "Rishat Shamsutdinov", Some("https://pbs.twimg.com/profile_images/2187811129/image.jpg"))
+      ),
+      Talk("Jira, тяжелая артиллерия энтерпрайза в стартапе",
+        "",
+        User(39486845L, "akitka", "Ksenia", Some("https://pbs.twimg.com/profile_images/476727113383297024/hJMp-Xxw.jpeg"))
       )
-      //      Talk("MongoDB - PHP",
-      //        "",
-      //        User(654, "no twitter", "Alexey Kardapoltsev", "https://lh6.googleusercontent.com/-sugMcSpyotA/AAAAAAAAAAI/AAAAAAAAAno/Q5uCER67CnM/s120-c/photo.jpg")
-      //      )
     ),
     DateTime(2014, 7, 10, 19 - 6).clicks,
     Nil
