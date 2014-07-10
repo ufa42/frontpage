@@ -68,7 +68,8 @@ object ConfEvents {
     List(
       Talk("Отладка распределенных систем",
         "",
-        User(9600972L, "levkhomich", "Lev Khomich", Some("https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png"))
+        User(9600972L, "levkhomich", "Lev Khomich", Some("https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png")),
+        "assets/talks/dds/dds.html"
       ),
       Talk("5 Event-driven лайфхаков для вашего кода",
         "",
