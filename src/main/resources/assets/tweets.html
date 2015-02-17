@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Ufa42</title>
+
+    <meta name="title" content="Конференция Ufa42" />
+    <meta name="description" content="Мы говорим о производственной части проектов: делимся личным опытом решения задач, рассказываем про интересные особенности языков и технологий, про эпичные фейлы и красивые решения.">
+    <meta name="keywords" content="ufa,42,conference,awesome,software,development">
+    <link rel="image_src" href="http://ufa42conf.org/assets/img/share.jpg" />
+
+    <meta property="og:title" content="Конференция Ufa42" />
+    <meta property="og:description" content="Мы говорим о производственной части проектов: делимся личным опытом решения задач, рассказываем про интересные особенности языков и технологий, про эпичные фейлы и красивые решения." />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:image" content="http://ufa42conf.org/assets/img/share.jpg">
+    <meta property="og:image:width" content="1166">
+    <meta property="og:image:height" content="652">
+    <meta property="og:type" content="place" />
+    <meta property="og:url" content="http://ufa42conf.org" />
+    <meta property="place:location:latitude"  content="54.7252452">
+    <meta property="place:location:longitude" content="55.949416">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@ufa42conf">
+
+    <link rel="shortcut icon" href="assets/img/logo.png">
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.jpg">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/img/apple-touch-icon-72x72.jpg">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/img/apple-touch-icon-114x114.jpg">
+
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="assets/css/tweets.css" id="mainstyle" type="text/css" media="all">
+
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body id="index">
+
+    <script type="text/template" id="mainTemplate">
+
+        <div class="hero-content text-center">
+            <div class="img-wrapper">
+                <img src="assets/img/42.png">
+            </div>
+            <div class="hero-normal">#ufa42</div>
+        </div>
+
+        <div id="hero-social">
+            <nav class="navigation navigation-social">
+                <ul class="navigation-bar">
+                    <li><a href="https://twitter.com/ufa42conf" target="_blank"><span class="fa fa-twitter"></span></a>
+                </ul>
+            </nav>
+            <div id="tweets" class="container">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="tweetTemplate">
+        <li class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+            <div class="tweet-text"><%= text %></div>
+            <div class="tweet-author"><a href="https://twitter.com/<%= user.name %>">@<%= user.name %></a></div>
+        </li>
+    </script>
+
+    <!-- Hero Section -->
+    <section id="hero" class="light" >
+      <div class="container">
+        <div class="home-bg" id="panelMain">
+        </div>
+      </div>
+    </section>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+
+    <!-- app scripts -->
+    <script type="text/javascript">
+        window.APP = window.APP || {};
+        APP.AppRouter = Backbone.Router.extend({
+
+          initialize: function (options) {
+            this.eventList = options.eventList;
+            this.tweets = options.tweets;
+          },
+
+          index: function () {
+            this.mainView = new APP.MainView({
+              tweets: this.tweets
+            });
+            $('#panelMain').html(this.mainView.render().el);
+          }
+        });
+    </script>
+    <script type="text/javascript" src="assets/js/app/models/all-tweets.js"></script>
+    <script type="text/javascript" src="assets/js/app/views/all-tweets.js"></script>
+    <script type="text/javascript">
+        (function(){
+            var router = new APP.AppRouter({
+                tweets: new APP.TweetCollection()
+            });
+            router.index();
+            setInterval(function() { router.tweets.fetch({ add: true}); }, 1000);
+        })();
+    </script>
+
+</body>
+</html>

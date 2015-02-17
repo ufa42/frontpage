@@ -20,6 +20,7 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
   }
 
   var tweets = List[Tweet]()
+  var allTweets = List[Tweet]()
 
   def fetchUsers(userIds: Set[Long]): List[User] =
     client.lookupUsers(userIds.toArray).map(User(_)).toList
@@ -43,8 +44,9 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
       val result = client.search(query)
       val limit = result.getRateLimitStatus
 
-      tweets = tweets :::
-        result.getTweets.filterNot(t => t.getText.startsWith("RT") || t.getText.startsWith("@")).map(Tweet(_)).toList.reverse
+      val newTweets = result.getTweets.filterNot(_.getText.startsWith("RT")).map(Tweet(_)).toList.reverse
+      allTweets = allTweets ::: newTweets
+      tweets = tweets ::: newTweets.filterNot(_.text.startsWith("@"))
 
       nextRunAfter = 2 * (if (limit.getRemaining > 0) subscriptions.length * limit.getSecondsUntilReset / limit.getRemaining else 5)
     } catch {

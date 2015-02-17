@@ -99,6 +99,9 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
       else
         getFromResource("assets/index.html")
     } ~
+    (get & path("tweets")) {
+      getFromResource("assets/tweets.html")
+    } ~
     pathPrefix("api") {
       get {
         path("events") {
@@ -116,6 +119,9 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
         } ~
         (path("tweets") & parameter('limit.as[Int].?)) { limit =>
           complete(Tweets(twitterBot.tweets.takeRight(limit.getOrElse(3))))
+        } ~
+        (path("all-tweets") & parameter('limit.as[Int].?)) { limit =>
+          complete(Tweets(twitterBot.allTweets.takeRight(limit.getOrElse(50))))
         } ~
         path("polls---123") {
           complete(polls)
