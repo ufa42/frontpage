@@ -1,6 +1,5 @@
 package org.ufa42conf
 
-import org.ufa42conf.User
 import spray.http.DateTime
 
 object ConfEvents {
@@ -68,13 +67,14 @@ object ConfEvents {
     Place("Дуслык", 54.7276034, 55.9494373, "Уфа, ул. Крупской, 9", "2 этаж"),
     List(
       Talk("Cвет в конце тоннеля - ReactJS", "", rinat),
-      Talk("c* -> riak", "", lev)
+      Talk("Переход с c* на riak", "", lev)
     ),
     List(
       Talk("Чем хорош Sikuli (кроме названия)", "", fil),
-      Talk("Почему UX-дизайн важен", "", h3m0ptys1s),
+      Talk("Из чего складывается user experience", "", h3m0ptys1s),
       Talk("\"Hello World\" на микросхеме", "", rinat),
-      Talk("Переход на cqrs и контекстное кэширование", "", lev)
+      Talk("Переход на cqrs и контекстное кэширование", "", lev),
+      Talk("Method swizzling: вы делаете это неправильно", "", rishat)
     ),
     DateTime(2015, 2, 25, 19 - 5).clicks,
     Nil
