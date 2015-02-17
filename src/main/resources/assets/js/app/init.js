@@ -65,6 +65,8 @@ function declOfNum(number, titles) {
       stuckClass: 'sticky'
     });
 
+    moment.lang('ru',{calendar:{sameElse:'L [в] LT'}});
+
 //    $('.fancybox').fancybox();
 
   });
