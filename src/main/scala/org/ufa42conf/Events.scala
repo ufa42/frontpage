@@ -6,14 +6,15 @@ import spray.http.DateTime
 object ConfEvents {
   val rinat = User(16135676L, "abdullin", "Rinat Abdullin", Some("http://pbs.twimg.com/profile_images/3479036762/40c99d96aa9a4e57cfa7d54d1fb7d5b2.jpeg"))
   val lev = User(9600972L, "levkhomich", "Lev Khomich", Some("https://pbs.twimg.com/profile_images/459340276188708864/b3X4WwoB.png"))
-  val andrey = User(2378268950L, "andrey_feokt", "Андрей Феоктистов", Some("https://pbs.twimg.com/profile_images/478884565369360384/RevpRhzK.png"))
+  val andrey = User(2378268950L, "andrey_feokt", "Andrey Feoktistov", Some("https://pbs.twimg.com/profile_images/478884565369360384/RevpRhzK.png"))
   val rishat = User(94962222L, "MrDarK_AngeL", "Rishat Shamsutdinov", Some("https://pbs.twimg.com/profile_images/507544081548206080/VJTYy-dc_400x400.jpeg"))
   val grisha = User(1, "no twitter", "Grigory Leonenko", Some("https://pp.vk.me/c613522/v613522262/f295/WXWyojalNxo.jpg"))
   val anjei = User(2, "no twitter", "Anjei Katkov", None)
   val ruslan = User(568182702L, "izuick", "Ruslan Zuick", Some("https://pbs.twimg.com/profile_images/2181307609/IMG_10832.gif"))
   val artem = User(3, "avpxalive", "Artem Popov", Some("https://pbs.twimg.com/profile_images/2470048812/fee2031e43a59d4d4fd583b9b34aa4dc.jpeg"))
-  val ksenia = User(39486845L, "akitka", "Ksenia", Some("https://pbs.twimg.com/profile_images/476727113383297024/hJMp-Xxw.jpeg"))
+  val ksenia = User(39486845L, "akitka", "Ksenia Makarova", Some("https://pbs.twimg.com/profile_images/476727113383297024/hJMp-Xxw.jpeg"))
   val fil = User(4, "lozga", "Filipp Terekhov", Some("https://pbs.twimg.com/profile_images/378800000802397697/a63d690bdef1a580e14ca4ee48fdc878_400x400.png"))
+  val h3m0ptys1s = User(5, "h3m0ptys1s", "Oleg Gumerov", Some("https://pbs.twimg.com/profile_images/553508290261311489/EOUgvLll_400x400.jpeg"))
 
   var event0 = Event(
     "140610",
@@ -71,6 +72,7 @@ object ConfEvents {
     ),
     List(
       Talk("Чем хорош Sikuli (кроме названия)", "", fil),
+      Talk("Почему UX-дизайн важен", "", h3m0ptys1s),
       Talk("\"Hello World\" на микросхеме", "", rinat),
       Talk("Переход на cqrs и контекстное кэширование", "", lev)
     ),
