@@ -35,7 +35,8 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
   addEvent(event3)
 
   val intentPatterns =
-    """\bсоби?ра,\b(за|подо?|при?|до|по)?[ийе]д[уеё]\b,идти,\bбуду\b,бы(ва)?ть\b,\bвизит,\bпосещ,слуша,гости,\bзагляну,
+    """\bсоби?ра,\b(за|подо?|при?|до|по)?[ийе]д[уеё]\b,идти,\bбуду\b,бы(ва)?ть\b,\bвизит,\bпосещ,
+      |слуша,гости,\bзагляну,\bвстре(ти|ч),\b(у,с)видимся,
       |\bgo,\bvisit,\bmeet,\bsee,\bwill,\battend""".stripMargin.split(',').toList.map(".*" + _ + ".*")
 
   context.system.scheduler.schedule(5.seconds,4.seconds, new Runnable {
