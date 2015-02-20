@@ -14,6 +14,7 @@ object ConfEvents {
   val ksenia = User(39486845L, "akitka", "Ksenia Makarova", Some("https://pbs.twimg.com/profile_images/476727113383297024/hJMp-Xxw.jpeg"))
   val fil = User(4, "lozga", "Filipp Terekhov", Some("https://pbs.twimg.com/profile_images/378800000802397697/a63d690bdef1a580e14ca4ee48fdc878_400x400.png"))
   val h3m0ptys1s = User(5, "h3m0ptys1s", "Oleg Gumerov", Some("https://pbs.twimg.com/profile_images/553508290261311489/EOUgvLll_400x400.jpeg"))
+  val sergey = User(6, "krasina15", "Sergey Tarasenko", Some("https://pbs.twimg.com/profile_images/915874529/f8376ccebd0220635cc7c8924804b120_400x400.png"))
 
   var event0 = Event(
     "140610",
@@ -74,7 +75,8 @@ object ConfEvents {
       Talk("Из чего складывается user experience", "", h3m0ptys1s),
       Talk("\"Hello World\" на микросхеме", "", rinat),
       Talk("Переход на cqrs и контекстное кэширование", "", lev),
-      Talk("Method swizzling: вы делаете это неправильно", "", rishat)
+      Talk("Objective-C Runtime: немного теории и практическое применение", "", rishat),
+      Talk("Крутя педали костылями", "", sergey)
     ),
     DateTime(2015, 2, 25, 19 - 5).clicks,
     Nil
