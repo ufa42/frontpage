@@ -68,15 +68,15 @@ object ConfEvents {
     Place("Гости", 54.719282, 55.949928, "Уфа, ул. Цюрупы, 12", ""),
     List(
       Talk("Cвет в конце тоннеля - ReactJS", "", rinat),
-      Talk("Переход с c* на riak", "", lev),
+      Talk("Переход с c* на riak", "assets/talks/migration/migration.html", lev),
       Talk("Objective-C Runtime: немного теории и практическое применение", "", rishat)
     ),
     List(
       Talk("Чем хорош Sikuli (кроме названия)", "", fil),
       Talk("Из чего складывается user experience", "", h3m0ptys1s),
       Talk("\"Hello World\" на микросхеме", "", rinat),
-      Talk("Переход на cqrs и контекстное кэширование", "", lev),
-      Talk("Крутя педали костылями", "", sergey)
+      Talk("Переход на cqrs и контекстное кэширование", "assets/talks/cqrs/cqrs.html", lev),
+      Talk("Доставить за 60 миллисекунд", "", sergey)
     ),
     DateTime(2015, 2, 25, 19 - 5).clicks,
     Nil

@@ -110,3 +110,9 @@ case class Tweets(tweets: List[Tweet])
 object Tweets extends DefaultJsonProtocol {
   implicit val _ = jsonFormat1(Tweets.apply)
 }
+
+case class Participants(participants: List[User])
+
+object Participants extends DefaultJsonProtocol {
+  implicit val _ = jsonFormat1(Participants.apply)
+}

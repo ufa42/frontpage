@@ -320,21 +320,58 @@ label.error { display: block; }
 #schedule .btn:hover {background:#e81b23; color:#fff;}
 #schedule .panel .panel-title a .fa { font-size: 36px; position: relative; }
 
-#speakers .speaker-item { padding-bottom: 50px; }
-#speakers .img-wrapper { text-align: center; }
-#speakers .img-wrapper img { margin: 0 auto; }
-#speakers .name { font-size: 25px; margin: 10px 0 2px; }
-#speakers .sub { font-size: 18px; margin: 0 0 15px; }
-#speakers p { padding: 0 20px; margin-bottom: 15px; opacity: 0.7; }
-#speakers .social-link a {
-  opacity: .3;
-  color: #fff;
-  padding: 2px 5px;
-  display: inline-block;
-  width: 31px;
-  height: 31px;
-  font-size: 18px; }
-#speakers .social-link a:Hover { opacity: 1; color:#e81b23; border-color:#e81b23; }
+
+
+#participants #panelParticipants ul{
+    list-style-type:none;
+    white-space:nowrap;
+    overflow-x:auto;
+}
+
+#participants #panelParticipants li{
+    display:inline;
+}
+#participants { padding-top: 0px; padding-bottom: 0px; }
+#participants .panel {
+  position: relative;
+  border: none;
+  -webkit-box-shadow:0 0 0 transparent;
+  box-shadow:0 0 0 transparent;
+  padding-left: 180px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  width: 90%; }
+#participants .panel .panel-heading { background: #FFF; border: none; border-bottom: 1px solid #ddd; padding-bottom: 20px; }
+#participants .panel .panel-title a { font-size: 28px; display: block; padding: 10px 0px 5px 0px; color: #e81b23; }
+#participants .panel .panel-title a:Hover { text-decoration: none; }
+#participants .panel .panel-title { padding: 0; }
+#participants .panel-group .panel-heading+.panel-collapse .panel-body { border-top: 0; }
+#participants .panel-group .panel .collapse.in { border-bottom: 0; }
+#participants .panel-group .panel .panel-body { padding-left: 0; padding-right: 0; padding-top: 10px; }
+#participants .author { font-size: 11pt; }
+#participants .time { margin-bottom: -10px; font-weight: 300; }
+#participants .fa { margin-right: 5px; }
+#participants .speaker-wrapper { position: absolute; left: 55px; width: 50px; height: 50px; z-index: 1; overflow: hidden; border-radius: 50%;}
+/*#participants #talks { margin-top: 60px; }*/
+#participants #talks .speaker-wrapper { top: 20px; }
+#participants #lightningTalks { padding-bottom: 40px; }
+#participants #lightningTalks > div:last-child .panel-heading { border-bottom: none; }
+#participants .panel .fa-bolt { position: absolute; right: 0; font-size: 24px; color: #948F8F; }
+#participants .panel-group { position: relative; margin:-20px -20px -20px; padding-top: 60px; }
+#participants .panel-group:after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  border:1px dashed #ccc;
+  bottom: 0;
+  top:0;
+  left: 95px;
+  z-index: 0;
+}
+#participants .btn:hover {background:#e81b23; color:#fff;}
+#participants .panel .panel-title a .fa { font-size: 36px; position: relative; }
+
+
 
 #sponsors .list-inline li { width: 19%; padding-left: 0; padding-right: 0; }
 #sponsors .list-inline { margin-bottom:30px;}

@@ -10,6 +10,7 @@ APP.AppRouter = Backbone.Router.extend({
   initialize: function (options) {
     this.eventList = options.eventList;
     this.tweets = options.tweets;
+    this.participants = options.participants;
   },
 
   index: function () {
@@ -20,6 +21,9 @@ APP.AppRouter = Backbone.Router.extend({
     this.talksView = new APP.TalksView({
       event: this.eventList.models[0]
     });
+    this.participantsView = new APP.ParticipantsView({
+      participants: this.eventList.models[0].get('attendees')
+    });
     this.mapView = new APP.MapView({
       event: this.eventList.models[0]
     });
@@ -28,6 +32,7 @@ APP.AppRouter = Backbone.Router.extend({
     });
     $('#panelMain').html(this.mainView.render().el);
     $('#panelTimeline').html(this.talksView.render().el);
+    $('#panelParticipants').html(this.participantsView.render().el);
     $('#panelMap').html(this.mapView.render().el);
     $('#panelStats').html(this.statsView.render().el);
   },

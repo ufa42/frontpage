@@ -120,6 +120,25 @@
         </div>
     </script>
 
+    <script type="text/template" id="participantsTemplate">
+        <ul>
+        </ul>
+    </script>
+
+    <script type="text/template" id="participantTemplate">
+        <li>
+        <!--<div class="panel panel-default">-->
+            <!--<div class="speaker-wrapper">-->
+                <!--<a href="https://twitter.com/<%= name %>" target="_blank">-->
+                    <!--<img src="<%= (typeof avatarUrl == 'undefined' ? 'assets/img/logo.png' : avatarUrl) %>" class="img-responsive" >-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<p class="author"><a href="https://twitter.com/<%= name %>" target="_blank"><strong> <%= fullname %></strong></a></p>&ndash;&gt;-->
+        <!--</div>-->
+            <div>test</div>
+        </li>
+    </script>
+
     <script type="text/template" id="statsTemplate">
         <div class="row">
             <div class="col-md-3 col-sm-3 col-xs-6">
@@ -259,10 +278,19 @@
 
     <!-- Schedule Section -->
     <section id="schedule" class="section dark">
-      <div class="container">
-        <div class="panel-group timeline-schedule" id="panelTimeline">
+        <div class="container">
+            <div class="panel-group timeline-schedule" id="panelTimeline">
+            </div>
         </div>
-      </div>
+    </section>
+    <!-- End Schedule Section -->
+
+    <!-- Participants Section -->
+    <section id="participants" class="section dark">
+        <div class="container">
+            <div class="panel-group participants" id="panelParticipants">
+            </div>
+        </div>
     </section>
     <!-- End Schedule Section -->
 
@@ -343,8 +371,10 @@
     <script type="text/javascript" src="assets/js/app/app_router.js"></script>
     <script type="text/javascript" src="assets/js/app/models/events.js"></script>
     <script type="text/javascript" src="assets/js/app/models/talks.js"></script>
+    <!--<script type="text/javascript" src="assets/js/app/models/participants.js"></script>-->
     <script type="text/javascript" src="assets/js/app/models/tweets.js"></script>
     <script type="text/javascript" src="assets/js/app/views/talks.js"></script>
+    <script type="text/javascript" src="assets/js/app/views/participants.js"></script>
     <script type="text/javascript" src="assets/js/app/views/hero.js"></script>
     <script type="text/javascript" src="assets/js/app/views/stats.js"></script>
     <script type="text/javascript" src="assets/js/app/views/map.js"></script>

@@ -117,6 +117,14 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
               complete(HttpResponse(StatusCodes.NotFound))
           }
         } ~
+//        (path("events" / Segment / "participants") & parameter('limit.as[Int].?)) { case (id, limit) =>
+//          events.find(_.id == id) match {
+//            case Some(found) =>
+//              complete(Participants(attendees(found).takeRight(limit.getOrElse(100))))
+//            case _ =>
+//              complete(HttpResponse(StatusCodes.NotFound))
+//          }
+//        } ~
         (path("tweets") & parameter('limit.as[Int].?)) { limit =>
           complete(Tweets(twitterBot.tweets.takeRight(limit.getOrElse(3))))
         } ~
