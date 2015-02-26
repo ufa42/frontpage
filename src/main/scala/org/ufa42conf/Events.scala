@@ -69,14 +69,14 @@ object ConfEvents {
     List(
       Talk("Cвет в конце тоннеля - ReactJS", "", rinat),
       Talk("Переход с c* на riak", "", lev, "assets/talks/migration/migration.html"),
-      Talk("Objective-C Runtime: немного теории и практическое применение", "", rishat)
+      Talk("Objective-C Runtime: немного теории и практическое применение", "", rishat, "assets/talks/swizzling.pdf")
     ),
     List(
-      Talk("Чем хорош Sikuli (кроме названия)", "", fil),
-      Talk("Из чего складывается user experience", "", h3m0ptys1s),
+      Talk("Чем хорош Sikuli (кроме названия)", "", fil, "assets/talks/Sikuli.odp"),
+      Talk("Из чего складывается user experience", "", h3m0ptys1s, "assets/talks/UX.ppt"),
       Talk("\"Hello World\" на микросхеме", "", rinat),
       Talk("Переход на cqrs и контекстное кэширование", "", lev, "assets/talks/cqrs/cqrs.html"),
-      Talk("Доставить за 60 миллисекунд", "", sergey)
+      Talk("Доставить за 60 миллисекунд", "", sergey, "assets/talks/CDN.pdf")
     ),
     DateTime(2015, 2, 25, 19 - 5).clicks,
     Nil
