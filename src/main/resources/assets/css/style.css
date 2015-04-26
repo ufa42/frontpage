@@ -377,6 +377,7 @@ label.error { display: block; }
 #sponsors .list-inline { margin-bottom:30px;}
 /*#sponsors img{ width: 100%;} */
 #sponsors ul { list-style-type: none;  }
+#sponsors .add-padding { padding-bottom: 25px;}
 
 #location-gmap { width:100%; height:650px; }
 #location-gmap img { max-width:none; }
