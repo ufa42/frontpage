@@ -93,7 +93,7 @@ object ConfEvents {
       Talk("Разработка Android-приложений на Scala", "", anjei),
       Talk("Аутсорсинг разработки ПО", "", h3m0ptys1s),
       Talk("TopCoder: риск - дело благородное", "", nikolay),
-      Talk("Apache Spark: как перестать беспокоиться и начать жить", "", lev)
+      Talk("Apache Spark: как перестать беспокоиться и начать жить", "", lev, "assets/talks/spark/spark.html")
     ),
     List(
       Talk("Телеметрия в .NET", "", rinat),
