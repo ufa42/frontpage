@@ -34,6 +34,7 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
   addEvent(event2)
   addEvent(event3)
   addEvent(event4)
+  addEvent(event5)
 
   val intentPatterns =
     """\bсоби?ра,\b(за|подо?|при?|до|по)?[ийе]д[уеё]\b,идти,\bбуду\b,бы(ва)?ть\b,\bвизит,\bпосещ,

@@ -11,12 +11,14 @@ object ConfEvents {
   val anjei = User(2, "no twitter", "Anjei Katkov", None)
   val ruslan = User(568182702L, "izuick", "Ruslan Zuick", Some("https://pbs.twimg.com/profile_images/512286625305358336/q49k5rcd.jpeg"))
   val artem = User(3, "avpxalive", "Artem Popov", Some("https://pbs.twimg.com/profile_images/2470048812/fee2031e43a59d4d4fd583b9b34aa4dc.jpeg"))
-  val ksenia = User(39486845L, "akitka", "Ksenia Makarova", Some("https://pbs.twimg.com/profile_images/476727113383297024/hJMp-Xxw.jpeg"))
+  val ksenia = User(39486845L, "akitka", "Ksenia Makarova", Some("https://pbs.twimg.com/profile_images/1082231307814518784/kmtpUXSe_400x400.jpg"))
   val fil = User(4, "lozga", "Filipp Terekhov", Some("https://pbs.twimg.com/profile_images/378800000802397697/a63d690bdef1a580e14ca4ee48fdc878_400x400.png"))
   val h3m0ptys1s = User(5, "h3m0ptys1s", "Oleg Gumerov", Some("https://pbs.twimg.com/profile_images/553508290261311489/EOUgvLll_400x400.jpeg"))
   val sergey = User(6, "krasina15", "Sergey Tarasenko", Some("https://pbs.twimg.com/profile_images/915874529/f8376ccebd0220635cc7c8924804b120_400x400.png"))
   val arsenij = User(7, "no twitter", "Arsenij Imamutdinov", Some("http://s018.radikal.ru/i511/1504/b6/fb5100a0446a.jpg"))
   val nikolay = User(8, "NikolayIakovlev", "Nikolay Iakovlev", Some("https://pbs.twimg.com/profile_images/2159744451/appleStore.jpg"))
+  val aygiz = User(9, "no twitter", "Aygiz Kunafin", Some(""))
+
 
   var event0 = Event(
     "140610",
@@ -103,4 +105,25 @@ object ConfEvents {
     DateTime(2015, 4, 27, 19 - 5).clicks,
     Nil
   )
+
+  var event5 = Event(
+    "190207",
+    Place("Башинформ", 54.729708, 55.962025, "Уфа, ул. Кирова, 45", ""),
+    Place("Синева", 54.732644, 55.956253, "Уфа, ул. Цюрупы, 85", ""),
+    List(
+      Talk("Event Storming - анализ доменов с огоньком", "", rinat),
+      Talk("Data science / kubernetes - как оно у нас работает", "", sergey),
+      Talk("Reactive CQRS с Event Sourcing", "", aygiz)
+
+    ),
+    List(
+      Talk("FoundationDB - конструктор БД", "", rinat),
+      Talk("Machine Learning в робототехнике для начинающих", "", aygiz),
+      Talk("3", "", ksenia)
+    ),
+    DateTime(2019, 2, 7, 19 - 5).clicks,
+    Nil
+  )
+
+
 }

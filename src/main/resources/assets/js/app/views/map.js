@@ -181,4 +181,3 @@ APP.MapView = Backbone.View.extend({
     this.map.setCenter(center);
   }
 });
-
