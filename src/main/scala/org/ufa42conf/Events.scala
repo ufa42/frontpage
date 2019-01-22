@@ -18,7 +18,7 @@ object ConfEvents {
   val arsenij = User(7, "no twitter", "Arsenij Imamutdinov", Some("http://s018.radikal.ru/i511/1504/b6/fb5100a0446a.jpg"))
   val nikolay = User(8, "NikolayIakovlev", "Nikolay Iakovlev", Some("https://pbs.twimg.com/profile_images/2159744451/appleStore.jpg"))
   val aigiz = User(9, "no twitter", "Aigiz Kunafin", Some("assets/img/aigiz.jpg"))
-  val sergeche = User(10, "no twitter", "Serge Chebotar", Some(""))
+  val sergeche = User(10, "no twitter", "Serge Chebotar", Some("assets/img/serge_che.jpg"))
 
 
   var event0 = Event(
@@ -114,13 +114,14 @@ object ConfEvents {
     List(
       Talk("Event Storming - анализ доменов с огоньком", "", rinat),
       Talk("Data science / kubernetes - как оно у нас работает", "", sergey),
+      Talk("Эволюция микросервисов на golang: от приложений к плагинам", "", sergeche),
       Talk("Reactive CQRS с Event Sourcing", "", aigiz)
 
     ),
     List(
       Talk("FoundationDB - конструктор БД", "", rinat),
       Talk("Machine Learning в робототехнике для начинающих", "", aigiz),
-      Talk("Self Sovereign Identity", "", sergeche)
+      Talk("Self Sovereign Identity: самоаутентификация на blockchain", "", sergeche)
     ),
     DateTime(2019, 2, 7, 19 - 5).clicks,
     Nil
