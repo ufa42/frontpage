@@ -12,7 +12,10 @@ import spray.httpx.SprayJsonSupport.sprayJsonUnmarshaller
 import spray.routing.HttpService
 
 
-class HttpServiceActor extends Actor with HttpService with ActorLogging {
+class HttpServiceActor (key: String, secret: String) extends Actor with HttpService with ActorLogging {
+
+
+
 
   import ConfEvents._
 
@@ -26,7 +29,7 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
 
   var polls = List[PollResult]()
 
-  val twitterBot = new TwitterBot("nnrqExJROGCpBglV5xazTtzQ4", "rXLGuo1fSkHPEugIpDL2aeUSOjUASXEimjsSbLSU2ic3iHNqPD", context.system.scheduler)
+  val twitterBot = new TwitterBot(key, secret, context.system.scheduler)
 
   twitterBot.addSubscription("#ufa42")
   addEvent(event0)
@@ -43,6 +46,7 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
 
   context.system.scheduler.schedule(5.seconds,4.seconds, new Runnable {
     override def run(): Unit = {
+
       val intentTweets = twitterBot.tweets.
         filter { t =>
           intentPatterns.find(p => t.text.toLowerCase.matches(".*" + p + ".*")) match {
@@ -108,7 +112,12 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
       get {
         path("events") {
           complete(Events(
-            events.map(event => EventDto(event, attendees(event)))
+            events.map(event => {
+              val att = attendees(event)
+
+              val history = (1 to 18).map { i => new User(0 - i, "history", "history", None)}
+              EventDto(event, att ++ history)
+            })
           ))
         } ~
         path("events" / Segment) { case id =>
@@ -151,11 +160,19 @@ class HttpServiceActor extends Actor with HttpService with ActorLogging {
 }
 
 object Ufa42App extends App {
+
+  if (args.length == 0) {
+        println("I need params")
+  } else {
+
+  val key = args(0)
+  val secret = args(1)
   val host = "0.0.0.0"
   val port = 8889
 
   implicit val system = ActorSystem("ufa42")
-  val service = system.actorOf(Props[HttpServiceActor])
+  val service = system.actorOf(Props(new HttpServiceActor(key, secret)))
   IO(Http) ! Http.Bind(service, host, port)
   system.awaitTermination()
+  }
 }

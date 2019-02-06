@@ -23,7 +23,7 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
   var allTweets = List[Tweet]()
 
   def fetchUsers(userIds: Set[Long]): List[User] =
-    client.lookupUsers(userIds.toArray).map(User(_)).toList
+    client.lookupUsers(userIds.toArray: _*).map(User(_)).toList
 //    userIds.map(id => User(client.showUser(id))).toList
 
   def addSubscription(queryStr: String): Unit = {
@@ -36,15 +36,28 @@ class TwitterBot(key: String, secret: String, scheduler: Scheduler) {
     var nextRunAfter = 30
     val query = new Query(queryStr)
 
-    if (!tweets.isEmpty)
-      query.setSinceId(tweets.map(_.id).max)
+    if (!tweets.isEmpty) {
+      var mx = tweets.map(_.id).max
+      query.setSinceId(mx)
+      println("Max ID: " + mx)
+    }
+
     query.setCount(100)
 
     try {
       val result = client.search(query)
       val limit = result.getRateLimitStatus
 
+     
+
+
+     
       val newTweets = result.getTweets.filterNot(_.getText.startsWith("RT")).map(Tweet(_)).toList.reverse
+
+      for (tweet <- newTweets) println(s"${tweet.id}: ${tweet.text}")
+      if (!newTweets.isEmpty)
+        println("=======================")
+
       allTweets = allTweets ::: newTweets
       tweets = tweets ::: newTweets.filterNot(_.text.startsWith("@"))
 

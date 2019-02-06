@@ -27,7 +27,7 @@ object ProjectBuild extends Build {
             "io.spray" % "spray-routing" % "1.3.1",
             "io.spray" % "spray-client" % "1.3.1",
             "io.spray" %% "spray-json" % "1.2.6",
-	          "org.twitter4j" % "twitter4j-core" % "4.0.1",
+	          "org.twitter4j" % "twitter4j-core" % "4.0.7",
             "com.typesafe" % "config" % "1.2.0",
             "com.typesafe.akka" %% "akka-actor" % "2.3.2"
           )
